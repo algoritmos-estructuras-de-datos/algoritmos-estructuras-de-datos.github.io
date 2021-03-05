@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>shared-macros</title>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+
+
+
+<div id="collapsiblemenu">
+  <button class="collapsible">
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+  </button>
+  <div class="content">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    </ul>
+    <ul>
+    <li><a href="#métodos-matemáticos-para-el-análisis-de-algoritmos">2 Métodos Matemáticos para el Análisis de Algoritmos</a>
+    <ul>
+    <li><a href="#notación-o">Notación <span class="math inline">O</span></a></li>
+    <li><a href="#notación-omega">Notación <span class="math inline">\Omega</span></a></li>
+    <li><a href="#notación-theta">Notación <span class="math inline">\Theta</span></a></li>
+    <li><a href="#ecuaciones-de-recurrencia">Ecuaciones de Recurrencia</a></li>
+    <li><a href="#resolución-de-ecuaciones-lineales-de-primer-orden">Resolución de Ecuaciones Lineales de Primer Orden</a></li>
+    <li><a href="#ejemplo-número-de-movidas-en-las-torres-de-hanoi-1">Ejemplo: Número de Movidas en las Torres de Hanoi</a></li>
+    <li><a href="#resolución-de-ecuaciones-lineales-homogéneas-con-coeficientes-constantes">Resolución de Ecuaciones Lineales Homogéneas con Coeficientes Constantes</a></li>
+    <li><a href="#ejemplo-número-de-movidas-en-las-torres-de-hanoi-2">Ejemplo: Número de movidas en las Torres de Hanoi</a></li>
+    <li><a href="#el-teorema-maestro">El Teorema Maestro</a></li>
+    </ul></li>
+    </ul>
+  </div>
+</div>
+
+
+<section id="métodos-matemáticos-para-el-análisis-de-algoritmos" class="level1">
+<h1>2 Métodos Matemáticos para el Análisis de Algoritmos</h1>
+<p>Para cuantificar la eficiencia de los algoritmos, utilizamos funciones que miden, por ejemplo, cuánto tiempo demora un algoritmo en ejecutarse sobre una entrada dada, cuál es su peor caso sobre un conjunto de entradas posibles, o cuánto demora en promedio, suponiendo una cierta distribución de probabilidad de las entradas. Ocasionalmente, estudiaremos el uso de otro tipo de recursos, como por ejemplo la cantidad de memoria utilizada.</p>
+<p>Es habitual que los resultados que obtengamos dependan de un parámetro&nbsp;<span class="math inline">n</span>, que representa el tamaño del problema (por ejemplo, el número de elementos a ordenar, el número de elementos en un conjunto en el que hay que hacer una búsqueda, etc.). Por lo tanto, nuestras funciones serán normalmente <em>funciones discretas</em>, esto es funciones cuyo argumento es un número entero nonegativo. Como notación, para este tipo de funciones utilizaremos indistintamente una notación de funciones&nbsp;<span class="math inline">f(n)</span> o de sucesiones&nbsp;<span class="math inline">f_n</span>.</p>
+<p>Tal como en Física el estudio de funciones de variable continua&nbsp;<span class="math inline">f(t)</span> conduce a ecuaciones diferenciales que luego hay que resolver, acá el estudio de funciones de variable discreta&nbsp;<span class="math inline">f(n)</span> conducirá a <em>ecuaciones de recurrencia</em>, y en este capítulo veremos algunos métodos para resolver ese tipo de ecuaciones.</p>
+<section id="notación-o" class="level2">
+<h2>Notación <span class="math inline">O</span></h2>
+<p>Al trabajar con funciones que pueden ser muy complicadas, en la práctica resulta útil poder ignorar los términos de orden inferior para concentrarse en el que determina la forma en que la función evoluciona cuando&nbsp;<span class="math inline">n \rightarrow \infty</span>. También resulta útil en ese caso poder ignorar factores constantes, para concentrarse en la forma como la función depende de&nbsp;<span class="math inline">n</span>.</p>
+<p>Utilizaremos la notación <span class="math display">
+f(n)=O(g(n))
+</span> si existe una constante&nbsp;<span class="math inline">C</span> y un número&nbsp;<span class="math inline">n_0</span> tal que</p>
+<p><span class="math display">
+|f(n)| \le C|g(n)|
+</span></p>
+<p>para todo&nbsp;<span class="math inline">n\ge n_0</span>.</p>
+<p>Cuando la notación&nbsp;<span class="math inline">O(g(n))</span> aparezca en medio de una fórmula, representará a una función que cumple con la condición anterior.</p>
+<p>Es importante notar que la notación&nbsp;<span class="math inline">O</span> provee una cota superior, la cual puede o no ser cercana a la función de la izquierda. Más adelante veremos una notación más ajustada.</p>
+<section id="ejemplos" class="level3">
+<h3>Ejemplos</h3>
+<ul>
+<li><span class="math inline">3n=O(n)</span></li>
+<li><span class="math inline">2=O(1)</span></li>
+<li><span class="math inline">2=O(n)</span></li>
+<li><span class="math inline">3n+2=O(n)</span></li>
+</ul>
+<p>La notación&nbsp;<span class="math inline">f(n)=O(g(n))</span> es utilizada por la mayoría de los autores, pero hay que usarla con cuidado, porque la igualdad que ahí aparece <strong>no es una relación reflexiva</strong>. En efecto, de&nbsp;<span class="math inline">3n=O(n)</span> y&nbsp;<span class="math inline">2=O(n)</span>, <strong>no</strong> podemos deducir que&nbsp;<span class="math inline">3n=2</span>. Hay que tener presente siempre que lo que aparece a la derecha del signo igual contiene menos información que lo de la izquierda.</p>
+<p>Para evitar las posible confusiones que podrían derivar de este uso no estándar del signo igual, algunos autores prefieren escribir</p>
+<p><span class="math display">
+f(n) \in O(g(n))
+</span></p>
+<p>en donde&nbsp;<span class="math inline">O(g(n))</span> se interpreta como el <em>conjunto</em> de todas las funciones que acotan a&nbsp;<span class="math inline">f(n)</span> de la manera indicada.</p>
+</section>
+</section>
+<section id="notación-omega" class="level2">
+<h2>Notación <span class="math inline">\Omega</span></h2>
+<p>De manera análoga, se puede definir una notación de cota inferior.</p>
+<p>Diremos que <span class="math display">
+f(n)=\Omega(g(n))
+</span> si existe una constante&nbsp;<span class="math inline">C</span> y un número&nbsp;<span class="math inline">n_0</span> tal que</p>
+<p><span class="math display">
+|f(n)|\ge C|g(n)|
+</span></p>
+<p>para todo&nbsp;<span class="math inline">n\ge n_0</span>.</p>
+<section id="ejemplos-1" class="level3">
+<h3>Ejemplos</h3>
+<ul>
+<li><span class="math inline">3=\Omega(1)</span></li>
+<li><span class="math inline">3n=\Omega(n)</span></li>
+<li><span class="math inline">3n=\Omega(1)</span></li>
+<li><span class="math inline">3n+2=\Omega(n)</span></li>
+</ul>
+</section>
+</section>
+<section id="notación-theta" class="level2">
+<h2>Notación <span class="math inline">\Theta</span></h2>
+<p>La notación&nbsp;<span class="math inline">\Theta</span> nos permite especificar el orden exacto de crecimiento de una función.</p>
+<p>Diremos que <span class="math display">
+f(n)=\Theta(g(n))
+</span> si&nbsp;<span class="math inline">f(n)=O(g(n))</span> y&nbsp;<span class="math inline">f(n)=\Omega(g(n))</span></p>
+<section id="ejemplo" class="level3">
+<h3>Ejemplo</h3>
+<ul>
+<li><span class="math inline">3n+2=\Theta(n)</span></li>
+</ul>
+<p>Esta notación enfatiza que lo más importante, cuando&nbsp;<span class="math inline">n</span> crece, es el orden de magnitud de las funciones, y que podemos ignorar constantes multiplicativas y términos de orden inferior para comparar funciones a largo plazo.</p>
+<p>Por otra parte, si por alguna razón queremos comparar funciones para&nbsp;<span class="math inline">n</span> pequeño, ahí toda la información es significativa, y como muestra el siguiente gráfico, en ese rango una solución “ineficiente” puede resultar preferible a otra que solo es eficiente para&nbsp;<span class="math inline">n</span> grande:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pylab inline</span></code></pre></div>
+<pre><code>Populating the interactive namespace from numpy and matplotlib</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n<span class="op">=</span>linspace(<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.plot(n,n<span class="op">+</span><span class="dv">6</span>,label<span class="op">=</span><span class="st">&#39;$n+6$&#39;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.plot(n,log(n)<span class="op">+</span><span class="dv">8</span>, label<span class="op">=</span><span class="st">&#39;$\log</span><span class="sc">{n}</span><span class="st">+8$&#39;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>leg<span class="op">=</span>plt.legend(loc<span class="op">=</span><span class="st">&#39;best&#39;</span>)</span></code></pre></div>
+<figure>
+<img src="02_Metodos_Matematicos_para_el_Analisis_de_Algoritmos_files/02_Metodos_Matematicos_para_el_Analisis_de_Algoritmos_6_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n<span class="op">=</span>linspace(<span class="dv">1</span>,<span class="dv">10</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.plot(n,n<span class="op">*</span>n, label<span class="op">=</span><span class="st">&#39;$n^2$&#39;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.plot(n,<span class="dv">2</span><span class="op">*</span>n<span class="op">*</span>log(n)<span class="op">+</span><span class="dv">5</span>, label<span class="op">=</span><span class="st">&#39;$2n\log</span><span class="sc">{n}</span><span class="st">+5$&#39;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>leg<span class="op">=</span>plt.legend(loc<span class="op">=</span><span class="st">&#39;best&#39;</span>)</span></code></pre></div>
+<figure>
+<img src="02_Metodos_Matematicos_para_el_Analisis_de_Algoritmos_files/02_Metodos_Matematicos_para_el_Analisis_de_Algoritmos_7_0.png" alt="png" /><figcaption aria-hidden="true">png</figcaption>
+</figure>
+</section>
+</section>
+<section id="ecuaciones-de-recurrencia" class="level2">
+<h2>Ecuaciones de Recurrencia</h2>
+<p>Al estudiar la eficiencia de algoritmos, a menudo podremos escribir ecuaciones que relacionan el valor de la función en&nbsp;<span class="math inline">n</span> con los valores de la función en&nbsp;<span class="math inline">n-1</span>,&nbsp;<span class="math inline">n-2</span>, etc. Para que estas ecuaciones tengan solución única, debemos especificar además las <em>condiciones iniciales</em>, también llamadas <em>condiciones de borde</em>.</p>
+<section id="ejemplo-número-de-movidas-en-las-torres-de-hanoi" class="level3">
+<h3>Ejemplo: Número de movidas en las Torres de Hanoi</h3>
+<p><span class="math display">
+\begin{align}
+a_n &amp;= 2 a_{n-1} + 1 \text{ para } n\ge 1\\
+a_0 &amp;= 0
+\end{align}
+</span></p>
+</section>
+<section id="ejemplo-números-de-fibonacci" class="level3">
+<h3>Ejemplo: Números de Fibonacci</h3>
+<p><span class="math display">
+\begin{align}
+f_n &amp;= f_{n-1}+f_{n-2} \text{ para } n\ge 2\\
+f_0 &amp;= 0\\
+f_1 &amp;= 1
+\end{align}
+</span></p>
+</section>
+</section>
+<section id="resolución-de-ecuaciones-lineales-de-primer-orden" class="level2">
+<h2>Resolución de Ecuaciones Lineales de Primer Orden</h2>
+<p>Consideremos ecuaciones de la forma</p>
+<p><span class="math display">
+a_{n}=ba_{n-1}+c_{n}
+</span></p>
+<p>donde&nbsp;<span class="math inline">b</span> es una constante distinta de cero y&nbsp;<span class="math inline">c_n</span> es una función conocida.</p>
+<p>Para ver cómo resolver este tipo de ecuaciones, a modo de “precalentamiento,” veamos cómo resolver esta ecuación para el caso&nbsp;<span class="math inline">b=1</span>:</p>
+<p><span class="math display">
+a_{n}=a_{n-1}+c_{n}
+</span></p>
+<p>Esto se puede reescribir como</p>
+<p><span class="math display">
+a_{n}-a_{n-1}=c_{n}
+</span></p>
+<p>y ahora introducimos sumatoria en ambos lados:</p>
+<p><span class="math display">
+\sum_{1\le k \le n}(a_{k}-a_{k-1})=\sum_{1\le k \le n}c_{k}
+</span></p>
+<p>Pero la suma de la izquierda es telescópica, así que el resultado es:</p>
+<p><span class="math display">
+a_n = a_0 + \sum_{1\le k \le n}c_{k}
+</span></p>
+<p>Abordemos ahora el caso general. La idea es tomar la ecuación&nbsp;<span class="math inline">a_{n}=ba_{n-1}+c_{n}</span> y reducirla de alguna manera al caso&nbsp;<span class="math inline">a=1</span> que ya sabemos resolver.</p>
+<p>Para esto, dividiremos ambos lados de la ecuación por el <em>factor sumante</em> <span class="math inline">b^n</span>, obteniendo</p>
+<p><span class="math display">
+\frac{a_{n}}{b^n}=\frac{a_{n-1}}{b^{n-1}}+\frac{c_{n}}{b^n}
+</span></p>
+<p>Si ahora hacemos la sustitución&nbsp;<span class="math inline">A_n = a_n/b^n</span> y&nbsp;<span class="math inline">C_n = c_n/b^n</span>, la ecuación queda en la forma</p>
+<p><span class="math display">
+A_{n}=A_{n-1}+C_{n}
+</span></p>
+<p>que ya sabemos cómo resolver:</p>
+<p><span class="math display">
+A_n = A_0 + \sum_{1\le k \le n}C_{k}
+</span></p>
+<p>Haciendo ahora la sustitución inversa, obtenemos el resultado:</p>
+<p><span class="math display">
+a_{n}=a_{0}b^{n}+\sum_{1\leq k\leq n}c_{k}b^{n-k}
+</span></p>
+</section>
+<section id="ejemplo-número-de-movidas-en-las-torres-de-hanoi-1" class="level2">
+<h2>Ejemplo: Número de Movidas en las Torres de Hanoi</h2>
+<p>La ecuación</p>
+<p><span class="math display">
+\begin{align}
+a_n &amp;= 2 a_{n-1} + 1 \text{ para } n\ge 1\\
+a_0 &amp;= 0
+\end{align}
+</span></p>
+<p>tiene como solución</p>
+<p><span class="math display">
+a_{n}=\sum_{1\leq k\leq n}2^{n-k}=\sum_{0\leq k\leq n-1}2^{k}
+</span></p>
+<p>lo cual se simplifica a</p>
+<p><span class="math display">
+a_{n}=2^{n}-1
+</span></p>
+<hr />
+<section id="ejercicio-2.1" class="level3">
+<h3>Ejercicio 2.1</h3>
+<p>Resuelva la ecuación</p>
+<p><span class="math display">
+a_n=b_n a_{n-1}+c_n
+</span></p>
+<p>donde&nbsp;<span class="math inline">b_n</span> y&nbsp;<span class="math inline">c_n</span> son funciones conocidas y&nbsp;<span class="math inline">b_n\neq 0</span> for all&nbsp;<span class="math inline">n\ge 0</span>.</p>
+<hr />
+</section>
+</section>
+<section id="resolución-de-ecuaciones-lineales-homogéneas-con-coeficientes-constantes" class="level2">
+<h2>Resolución de Ecuaciones Lineales Homogéneas con Coeficientes Constantes</h2>
+<p>Consideremos por ejemplo la ecuación de Fibonacci</p>
+<p><span class="math display">
+\begin{align}
+f_n &amp;= f_{n-1}+f_{n-2} \text{ para } n\ge 2\\
+f_0 &amp;= 0\\
+f_1 &amp;= 1
+\end{align}
+</span></p>
+<p>La siguiente tabla muestra los valores que toma esta función:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">𝑛</span></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+<th>17</th>
+<th>18</th>
+<th>19</th>
+<th>20</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">f_n</span></td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+<td>13</td>
+<td>21</td>
+<td>34</td>
+<td>55</td>
+<td>89</td>
+<td>144</td>
+<td>233</td>
+<td>377</td>
+<td>610</td>
+<td>987</td>
+<td>1597</td>
+<td>2584</td>
+<td>4181</td>
+<td>6765</td>
+</tr>
+</tbody>
+</table>
+<p>Como se ve, el crecimiento es bastante rápido. Esto es porque este tipo de ecuaciones suele tener soluciones de tipo exponencial, esto es, soluciones de la forma</p>
+<p><span class="math display">
+f_n = \lambda^n
+</span></p>
+<p>para alguna constante&nbsp;<span class="math inline">\lambda</span>. Además, si encontramos más de una constante&nbsp;<span class="math inline">\lambda</span> para la cual se satisfaga la ecuación, por ser una ecuación lineal, cualquier combinación lineal de esas soluciones también será solución.</p>
+<p>Si logramos encontrar una solución que cumpla las condiciones iniciales bajo este supuesto, no necesitamos seguir buscando, porque la solucion es única.</p>
+<p>Sustituyendo&nbsp;<span class="math inline">\lambda^n</span> en lugar de&nbsp;<span class="math inline">f_n</span>, y dividiendo ambos lados por&nbsp;<span class="math inline">\lambda^{n-2}</span> obtenemos la siguiente ecuación</p>
+<p><span class="math display">
+\lambda^{2}-\lambda-1=0
+</span></p>
+<p>llamada la <em>ecuación característica</em> de la ecuación de recurrencia.</p>
+<p>Resolviendo esta ecuación de segundo grado, obtenemos las raíces</p>
+<p><span class="math display">
+\phi=\frac{1+\sqrt{5}}{2}\approx1.618\ldots,\qquad\hat{\phi}=\frac{1-\sqrt{5}}{2}\approx-0.618\ldots
+</span></p>
+<p>La solución general sería una combinación lineal de estas soluciones:</p>
+<p><span class="math display">
+f_{n}=A\phi^{n}+B\hat{\phi}^{n}
+</span></p>
+<p>La condición inicial&nbsp;<span class="math inline">f_0=0</span> implica que&nbsp;<span class="math inline">B=-A</span>, y por lo tanto</p>
+<p><span class="math display">
+f_{n}=A(\phi^{n}-\hat{\phi}^{n})
+</span></p>
+<p>La segunda condición inicial,&nbsp;<span class="math inline">f_1=1</span>, implica que</p>
+<p><span class="math display">
+A(\phi-\hat{\phi})=A\sqrt{5}=1
+</span></p>
+<p>Con lo cual obtenermos la siguiente fórmula para los números de Fibonacci:</p>
+<p><span class="math display">
+f_{n}=\frac{1}{\sqrt{5}}(\phi^{n}-\hat{\phi}^{n})
+</span></p>
+<p>Nótese que como&nbsp;<span class="math inline">|\hat{\phi}|&lt;1</span>, el aporte del segundo término tiende a cero rápidamente, y&nbsp;<span class="math inline">f_n=\Theta(\phi^n)</span>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(n):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    r5<span class="op">=</span>math.sqrt(<span class="dv">5</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    phi<span class="op">=</span>(<span class="dv">1</span><span class="op">+</span>r5)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    phihat<span class="op">=</span>(<span class="dv">1</span><span class="op">-</span>r5)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">/</span>r5<span class="op">*</span>(phi<span class="op">**</span>n<span class="op">-</span>phihat<span class="op">**</span>n)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(f(<span class="dv">10</span>), f(<span class="dv">15</span>), f(<span class="dv">20</span>))</span></code></pre></div>
+<pre><code>55.000000000000014 610.0000000000003 6765.000000000005</code></pre>
+<p>El “ruido” que es observa en las cifras finales es producto de los errores de truncación al representar irracionales como&nbsp;<span class="math inline">\sqrt{5}</span> en punto flotante. Si expandiéramos las fórmulas y simplificáramos, obtendríamos los valores exactos.</p>
+</section>
+<section id="ejemplo-número-de-movidas-en-las-torres-de-hanoi-2" class="level2">
+<h2>Ejemplo: Número de movidas en las Torres de Hanoi</h2>
+<p>Veamos ahora una nueva manera de resolver la ecuación de Hanoi, la cual podemos rescribir como</p>
+<p><span class="math display">
+\begin{align}
+a_n - 2 a_{n-1} &amp;= 1 \text{ para } n\ge 1\\
+a_0 &amp;= 0
+\end{align}
+</span></p>
+<p>Ésta es una ecuación lineal de coeficientes constantes <em>no homogénea</em>, de modo que el método que acabamos de ver no es directamente aplicable.</p>
+<p>Si definimos el operador&nbsp;<span class="math inline">\Delta</span> como&nbsp;<span class="math inline">\Delta a_n = a_{n+1}-a_n</span>, podemos transformar esta ecuación en una ecuación homogénea aplicando el operador&nbsp;<span class="math inline">\Delta</span> a ambos lados:</p>
+<p><span class="math display">
+\Delta (a_n - 2 a_{n-1}) = \Delta 1
+</span></p>
+<p><span class="math display">
+(a_{n+1}-2a_n)-(a_n-2a_{n-1})=1-1
+</span></p>
+<p>esto es</p>
+<p><span class="math display">
+a_{n+1}-3a_n+2a_{n-1}=0
+</span></p>
+<p>De manera similar, cualquier ecuación de este tipo en que la parte no homogénea es un polinomio en&nbsp;<span class="math inline">n</span> puede convertirse en una ecuación homogénea por aplicaciones reiteradas del operador&nbsp;<span class="math inline">\Delta</span>.</p>
+<p>Si “pasamos en limpio” esta ecuación de modo que su término líder sea&nbsp;<span class="math inline">a_n</span>, se ve que la nueva ecuación sólo es válida para&nbsp;<span class="math inline">n\ge 2</span>, de modo que se necesita una segunda condición inicial, la cual se obtiene sin problemas desde la ecuación original.</p>
+<hr />
+<section id="ejercicio-2.2" class="level3">
+<h3>Ejercicio 2.2</h3>
+<p>Resuelva la ecuación homogénea de las Torres de Hanoi:</p>
+<p><span class="math display">
+\begin{align}
+a_n-3a_{n-1}+2a_{n-2}&amp;=0 \text{ para } n\ge 2\\
+a_0=0\\
+a_1=1
+\end{align}
+</span></p>
+<hr />
+</section>
+</section>
+<section id="el-teorema-maestro" class="level2">
+<h2>El Teorema Maestro</h2>
+<p>Veremos diversos algoritmos que dan origen a recurrencias de la forma</p>
+<p><span class="math display">
+T(n)=pT(\frac{n}{q})+Cn^r
+</span></p>
+<p>Para simplificar, supongamos que&nbsp;<span class="math inline">n</span> es una potencia de&nbsp;<span class="math inline">q</span>, digamos&nbsp;<span class="math inline">n=q^k</span>, para que la división&nbsp;<span class="math inline">n/q</span> siempre se pueda hacer en forma exacta. Entonces</p>
+<p><span class="math display">
+T(q^{k})=pT(q^{k-1})+C(q^r)^{k}
+</span></p>
+<p>Si introducimos una nueva función incógnita&nbsp;<span class="math inline">a_k = T(q^{k})</span>, podemos reescribir la ecuación como</p>
+<p><span class="math display">
+a_{k}=pa_{k-1}+C(q^r)^{k}
+</span></p>
+<p>la cual es de un tipo que ya sabemos resolver. Su solución es</p>
+<p><span class="math display">
+\begin{align}
+a_{k} &amp; =a_{0}p^{k}+C\sum_{1\leq j\leq k}(q^r)^{j}p^{k-j}\\
+      &amp; = p^k \left( a_0 + C \sum_{1\leq j\leq k} \left(\frac{q^r}{p}\right)^j \right)
+\end{align}
+</span></p>
+<p>El comportamiento de esta sumatoria depende de si el cuociente&nbsp;<span class="math inline">q^r/p</span> es menor, igual o mayor que&nbsp;<span class="math inline">1</span>.</p>
+<p>Antes de analizar cada caso, observemos que&nbsp;<span class="math inline">n=q^k</span> implica que&nbsp;<span class="math inline">k=\log_q{n}</span>, y</p>
+<p><span class="math display">
+p^k = p^{\log_{q}n}=(q^{\log_{q}p})^{\log_{q}n}=(q^{\log_{q}n})^{\log_{q}p}=n^{\log_{q}p}
+</span></p>
+<p>con lo cual la solución puede escribirse como</p>
+<p><span class="math display">
+T(n)=n^{\log_{q}p} \left( T(1)+C \sum_{1\leq j\leq\log_{q}n} \left(\frac{q^r}{p}\right)^{j}\right)
+</span></p>
+<section id="caso-qrp" class="level3">
+<h3>Caso <span class="math inline">q^r&lt;p</span>:</h3>
+<p>En este caso, la sumatoria está acotada por una constante, porque la serie respectiva es convergente, de modo que</p>
+<p><span class="math display">
+T(n)=\Theta(n^{\log_{q}p})
+</span></p>
+</section>
+<section id="caso-qrp-1" class="level3">
+<h3>Caso <span class="math inline">q^r=p</span>:</h3>
+<p>En este caso la sumatoria es logarítmica, y&nbsp;<span class="math inline">\log_q{p}=r</span>, de modo que</p>
+<p><span class="math display">
+T(n) = \Theta(n^r \log{n})
+</span></p>
+</section>
+<section id="caso-qrp-2" class="level3">
+<h3>Caso <span class="math inline">q^r&gt;p</span>:</h3>
+<p>En este caso la sumatoria es la suma de una progresión geométrica, que podemos escribir en forma cerrada como</p>
+<p><span class="math display">
+\begin{align}
+T(n) &amp;= n^{\log_q{p}}\left( T(1)+C\frac{q^r}{p}\frac{\left( \frac{q^r}{p} \right) ^{\log_q{n}}-1}{\frac{q^r}{p}-1}  \right)\\
+     &amp;= \Theta(n^{\log_q{p}}+n^r)\\
+     &amp; = \Theta(n^r) \text{ porque } \log_q{p}&lt;r
+\end{align}
+</span></p>
+<p>En conclusión, hemos demostrado lo siguiente:</p>
+</section>
+<section id="teorema-maestro" class="level3">
+<h3>Teorema Maestro</h3>
+<p>La ecuación</p>
+<p><span class="math display">
+T(n)=pT(\frac{n}{q})+Cn^r
+</span></p>
+<p>tiene solución</p>
+<p><span class="math display">
+T(n) =
+\begin{cases}
+\Theta(n^r) &amp; \text{ si } p&lt;q^r\\
+\Theta(n^r \log{n}) &amp; \text{ si } p=q^r\\
+\Theta(n^{\log_q{p}}) &amp; \text{ si } p&gt;q^r
+\end{cases}
+</span></p>
+<hr />
+</section>
+<section id="ejercicio-2.3" class="level3">
+<h3>Ejercicio 2.3</h3>
+<p>El método del ordenación <strong>Stooge Sort</strong> es un método recursivo que puede describirse de la siguiente manera:</p>
+<ul>
+<li>Si el primer elemento es mayor que el último, los intercambiamos</li>
+<li>Si hay 3 o más elementos en la lista, entonces:
+<ul>
+<li>Ordenar los primeros 2/3 de la lista recursivamente</li>
+<li>Ordenar los últimos 2/3 de la lista, recursivamente, y</li>
+<li>Ordenar (¡de nuevo!) los primeros 2/3 de la lista.</li>
+</ul></li>
+</ul>
+<p>Escriba una ecuación que modele el tiempo de ejecución de Stooge Sort y resuélvala usando el Teorema Maestro.</p>
+<hr />
+</section>
+</section>
+</section>
+
+<div id="lastupdate">
+Last updated: jue mar  4 15:10:28 -05 2021
+</div>
+</article>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

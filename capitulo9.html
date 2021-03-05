@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>shared-macros</title>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+
+
+
+<div id="collapsiblemenu">
+  <button class="collapsible">
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+  </button>
+  <div class="content">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    </ul>
+    <ul>
+    <li><a href="#compresión-de-datos">9 Compresión de Datos</a>
+    <ul>
+    <li><a href="#codificación-de-mensajes">Codificación de mensajes</a></li>
+    <li><a href="#entropía-de-shannon">Entropía de Shannon</a></li>
+    <li><a href="#algoritmo-de-huffman">Algoritmo de Huffman</a></li>
+    <li><a href="#algoritmo-de-lempel-ziv">Algoritmo de Lempel-Ziv</a></li>
+    </ul></li>
+    </ul>
+  </div>
+</div>
+
+
+<section id="compresión-de-datos" class="level1">
+<h1>9 Compresión de Datos</h1>
+<p>En esta sección veremos la aplicación de los árboles a la compresión de datos. Por compresión de datos entendemos cualquier algoritmo que reciba una cadena de datos de entrada y que sea capaz de generar una cadena de datos de salida cuya representación ocupa menos espacio de almacenamiento, y que permite -mediante un algoritmo de descompresión- recuperar total o parcialmente el mensaje recibido inicialmente. A nosotros nos interesa particularmente los algoritmos de compresión sin pérdida, es decir, aquellos algoritmos que permiten recuperar completamente la cadena de datos inicial.</p>
+<section id="codificación-de-mensajes" class="level2">
+<h2>Codificación de mensajes</h2>
+<p>Supongamos que estamos codificando mensajes en binario con un alfabeto de tamaño&nbsp;<span class="math inline">n</span>. Para esto se necesitan&nbsp;<span class="math inline">\left\lceil \log_{2}(n)\right\rceil</span> bits por símbolo, si todos los códigos son de la misma longitud.</p>
+<p><strong>Ejemplo</strong>: Para el alfabeto A,<span class="math inline">...</span>,Z de 26 letras se necesitan códigos de&nbsp;<span class="math inline">\left\lceil \log_{2}(26)\right\rceil =5</span> bits</p>
+<p><strong>Problema</strong>: Es posible disminuir el número promedio de bits por símbolo?</p>
+<p><strong>Solución</strong>: Asignar códigos más cortos a los símbolos más frecuentes.</p>
+<p>Un ejemplo clásico de aplicación de este principio es el código Morse:</p>
+<pre><code>A .-     H ....  O ---   V ...-
+B -...   I ..    P .--.  W .--
+C _._.   J .---  Q --.-  X -..-
+D -..    K -.-   R .-.   Y -.--
+E .      L .-..  S ...   Z --..
+F ..-.   M --    T -
+G--.     N -.    U ..-</code></pre>
+<p>Este código se puede representar mediante un árbol binario:</p>
+<figure>
+<img src="recursos/morse.png" alt="morse" /><figcaption aria-hidden="true">morse</figcaption>
+</figure>
+<p>Podemos ver en el árbol que letras de mayor probabilidad de aparición (en idioma inglés) están más cerca de la raíz, y por lo tanto tienen una codificación más corta que letras de baja frecuencia.</p>
+<p>El código Morse tiene el problema que no es auto-delimitante. Por ejemplo, SOS y IAMS tienen la misma codificación. Eso requiere de un tercer símbolo (espacio) para separar las letras.</p>
+<p>Se debe tener en cuenta que este problema se produce sólo cuando el código es de largo variable (como en Morse), pues en otros códigos de largo fijo (por ejemplo el código ASCII, donde cada caracter se representa por 8 bits) es directo determinar cuales elementos componen cada carácter.</p>
+<p>La condición que debe cumplir una codificación para no presentar ambigüedades, es que la codificación de ningún caracter sea prefijo de otra. Esto se llama un <em>código libre de prefijos</em> y se puede visualizar mediante un árbol que sólo tiene información en las hojas, como por ejemplo:</p>
+<figure>
+<img src="recursos/prefix-free.png" alt="prefix-free" /><figcaption aria-hidden="true">prefix-free</figcaption>
+</figure>
+<p>Como nuestro objetivo es obtener la secuencia codificada más corta posible, entonces tenemos que encontrar la codificación que en promedio use el menor largo promedio del código de cada letra.</p>
+<p><strong>Problema</strong>: Dado un alfabeto&nbsp;<span class="math inline">a_{1},\ldots ,a_{n}</span> tal que la probabilidad de que la letra&nbsp;<span class="math inline">a_{i}</span> aparezca en un mensaje es&nbsp;<span class="math inline">p_{i}</span>, encontrar un código libre de prefijos que minimice el largo promedio del código de una letra.</p>
+<p>Supongamos que a la letra&nbsp;<span class="math inline">a_{i}</span> se le asigna una codificación de largo&nbsp;<span class="math inline">t_{i}</span>, entonces el largo esperado es:</p>
+<p><span class="math display">
+\sum _{i}p_{i}t_{i}
+</span></p>
+<p>es decir, el promedio ponderado de todas las letras por su probabilidad de aparición.</p>
+<p><strong>Ejemplo</strong>:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">a_i</span></th>
+<th><span class="math inline">p_i</span></th>
+<th><span class="math inline">\text{Código}</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>0.30</td>
+<td>00</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>0.25</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>0.08</td>
+<td>0110</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>0.20</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td>0.05</td>
+<td>0111</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>0.12</td>
+<td>010</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">
+\begin{align}
+\text{Costo esperado} &amp; = 2(0.30+0.25+0.20)+3(0.12)+4(0.08+0.05)\\
+&amp; = 2.075+0.36+0.52\\
+&amp; = 2.38 \text{ bits por símbolo}
+\end{align}
+</span></p>
+</section>
+<section id="entropía-de-shannon" class="level2">
+<h2>Entropía de Shannon</h2>
+<p>Shannon define la entropía del alfabeto como:</p>
+<p><span class="math display">
+-\sum _{i}p_{i}\log _{2}(p_{i})
+</span></p>
+<p>El teorema de Shannon dice que el número promedio de bits esperable para un conjunto de letras y probabilidades dadas se aproxima a la entropía del alfabeto. Podemos comprobar esto en nuestro ejemplo anterior donde la entropia de Shannon es:</p>
+<p><span class="math display">
+\begin{align}
+\text{Entropía} &amp; = - ( 0.30\log _2(0.30)+0.25\log _2(0.25)+0.08\log_2(0.08) \\
+&amp; + 0.2\log_2(0.2)+0.05\log_2(0.05)+0.12\log_2(0.12) ) \\
+&amp; = 0.521+0.5+0.2915+0.4643+0.2160+0.3670\\
+&amp; \approx 2.36
+\end{align}
+</span></p>
+<p>que es bastante cercano al costo esperado de&nbsp;<span class="math inline">2.38</span> que calculamos anteriormente.</p>
+<p>A continuación describiremos un algoritmo que nos permitan encontrar codificaciones que minimicen el costo total.</p>
+</section>
+<section id="algoritmo-de-huffman" class="level2">
+<h2>Algoritmo de Huffman</h2>
+<p>El algoritmo de Huffman permite construir un código libre de prefijos de costo esperado mínimo.</p>
+<p>Inicialmente, comenzamos con&nbsp;<span class="math inline">n</span> hojas desconectadas, cada una rotulada con una letra del alfabeto y con una probabilidad asociada.</p>
+<p>Consideremos este conjunto de hojas como un bosque. El algoritmo, en seudo código, es:</p>
+<pre><code>while Nº de árboles del bosque &gt; 1:
+    Encontrar los 2 árboles de peso mínimo y  
+    unirlos con una nueva raíz que se crea para esto
+    
+    Arbitrariamente, rotulamos las dos 
+    ramas que salen como &quot;0&quot; y &quot;1&quot;
+    
+    Le damos a la nueva raíz un peso que es  
+    la suma de los pesos de sus subárboles
+</code></pre>
+<p><strong>Ejemplo</strong>: Consideremos el siguiente conjunto de letras con sus probabilidades</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">a_i</span></th>
+<th><span class="math inline">a</span></th>
+<th><span class="math inline">b</span></th>
+<th><span class="math inline">c</span></th>
+<th><span class="math inline">d</span></th>
+<th><span class="math inline">e</span></th>
+<th><span class="math inline">f</span></th>
+<th><span class="math inline">g</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">p_i</span></td>
+<td>0.121</td>
+<td>0.051</td>
+<td>0.137</td>
+<td>0.094</td>
+<td>0.274</td>
+<td>0.281</td>
+<td>0.042</td>
+</tr>
+</tbody>
+</table>
+<p>Entonces la construcción del árbol de Huffman es (los números en negrita indican los árboles con menor peso):</p>
+<figure>
+<img src="recursos/huffman.gif" alt="huffman" /><figcaption aria-hidden="true">huffman</figcaption>
+</figure>
+<p>El costo esperado es de&nbsp;<span class="math inline">2.53</span> bits por letra, mientras que una codificación de largo fijo (igual número de bits para cada símbolo) tendría un costo de 3 bits por letra.</p>
+<p>El algoritmo de codificación de Huffman se basa en dos supuestos que le restan eficiencia:</p>
+<ul>
+<li><p>Supone que los caracteres son generados por una fuente aleatoria independiente, lo que en la práctica no es cierto. Por ejemplo, la probabilidad de encontrar una vocal después de una consonante es mucho mayor que la de encontrarla después de una vocal; después de una q es muy probable encontrar una u, etc.</p></li>
+<li><p>Debido a que la codificación se hace carácter a carácter, se pierde eficiencia al no considerar que hay grupos de caracteres más probables que otros.</p></li>
+</ul>
+</section>
+<section id="algoritmo-de-lempel-ziv" class="level2">
+<h2>Algoritmo de Lempel-Ziv</h2>
+<p>Una codificación que toma en cuenta los problemas señalados para la codificación de Huffman sería una donde no solo se consideraran caracteres uno a uno, sino que donde además se consideraran aquellas secuencias de alta probabilidad en el texto. Por ejemplo, en el texto:</p>
+<p><span class="math display">
+aaabbaabaa
+</span></p>
+<p>obtendríamos un mayor grado de eficiencia si además de considerar caracteres como&nbsp;<span class="math inline">a</span> y&nbsp;<span class="math inline">b</span>, también considerásemos la secuencia&nbsp;<span class="math inline">aa</span> al momento de codificar.</p>
+<p>Una generalización de esta idea es el algoritmo de Lempel-Ziv. Este algoritmo consiste en separar la secuencia de caracteres de entrada en bloques o secuencias de caracteres de distintos largos, manteniendo una diccionario de bloques ya vistos. Aplicando el algoritmo de Huffman a estos bloques y sus probabilidades, se puede sacar provecho de las secuencias que se repitan con más probabilidad en el texto. El algoritmo de codificación es el siguiente:</p>
+<pre><code>1.- Inicializar el diccionario con todos  
+    los bloques de largo 1
+2.- Seleccionar el prefijo más largo del  
+    mensaje que calce con alguna secuencia W  
+    del diccionario y eliminar W del mensaje
+3.- Codificar W con su índice en el diccionario
+4.- Agregar W seguido del primer símbolo del  
+    próximo bloque al diccionario.
+5.- Repetir desde el paso 2.</code></pre>
+<p><strong>Ejemplo</strong>: Si el mensaje es</p>
+<p><span class="math display">
+abbaabbaababbaaaabaabba
+</span></p>
+<p>la codificación y los bloques agregados al diccionario serían (donde los bloques reconocidos son mostrados entre paréntesis y la secuencia agregada al diccionario en cada etapa es mostrada como un subíndice):</p>
+<p><span class="math display">
+(a)_{ab}(b)_{bb}(b)_{ba}(a)_{aa}(ab)_{abb}(ba)_{baa}(ab)_{aba}(abb)_{abba}(aa)_{aaa}(aa)_{aab}(baa)_{baab}(bb)_{bba}(a)
+</span></p>
+<p>Teóricamente, el diccionario puede crecer indefinidamente, pero en la práctica se opta por tener un diccionario de tamaño limitado. Cuando se llega al límite del diccionario, no se agregan más bloques.</p>
+<p>Lempel-Ziv es una de las alternativas a Huffman. Existen varios otros algoritmos derivados de estos, como LZW (Lempel-Ziv-Welch), que es usado en programas de compresión como el <code>compress</code> de UNIX.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</section>
+</section>
+
+<div id="lastupdate">
+Last updated: jue mar  4 15:12:05 -05 2021
+</div>
+</article>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

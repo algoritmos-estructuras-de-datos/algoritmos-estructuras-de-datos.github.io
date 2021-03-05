@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>shared-macros</title>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+
+
+
+<div id="collapsiblemenu">
+  <button class="collapsible">
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+  </button>
+  <div class="content">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    </ul>
+    <ul>
+    <li><a href="#pilas-colas-y-colas-de-prioridad">5 Pilas, Colas y Colas de Prioridad</a>
+    <ul>
+    <li><a href="#pilas-stacks">Pilas (“<em>Stacks</em>”)</a></li>
+    <li><a href="#colas-queues">Colas (“<em>Queues</em>”)</a></li>
+    <li><a href="#colas-de-prioridad">Colas de Prioridad</a></li>
+    </ul></li>
+    </ul>
+  </div>
+</div>
+
+
+<section id="pilas-colas-y-colas-de-prioridad" class="level1">
+<h1>5 Pilas, Colas y Colas de Prioridad</h1>
+<p>En este capítulo veremos tres <em>tipos de datos abstractos</em> (<em>TDAs</em>) que son muy utilizados.</p>
+<p>Un tipo de datos abstracto es un conjunto de datos, más operaciones asociadas, para el cual se aplica una política de “ocultamiento de información”: los usuarios del TDA saben <strong>qué</strong> funcionalidad éste provee, pero no saben <strong>cómo</strong> se implementa esta funcionalidad.</p>
+<p>Esta separación de responsabilidad es fundamental para mantener la complejidad bajo control. Sólo los implementadores del TDA necesitan preocuparse de su implementación, y además son libres para modificarla en la medida que la interfaz de uso se mantenga intacta.</p>
+<section id="pilas-stacks" class="level2">
+<h2>Pilas (“<em>Stacks</em>”)</h2>
+<p>Una <strong>pila</strong>, también llamada <em>stack</em> o <em>pushdown</em> en inglés, es una lista de elementos en la cual todas las operaciones se realizan solo en un extremo de la lista.</p>
+<p>Es usual visualizar la pila creciendo verticalmente hacia arriba, y llamamos “tope” a su extremo superior:</p>
+<figure>
+<img src="recursos/pila.png" alt="pila" /><figcaption aria-hidden="true">pila</figcaption>
+</figure>
+<p>Las dos operaciones básicas son <strong>push</strong> (apilar), que agrega un elemento encima de todos, y <strong>pop</strong> (desapilar), que extrae el elemento del tope de la pila. Más precisamente, si <code>s</code> es un objeto de tipo Pila, están disponibles las siguientes operaciones:</p>
+<ul>
+<li><code>s.push(x)</code>: apila x en el tope de la pila <code>s</code></li>
+<li><code>x=s.pop()</code>: extrae y retorna el elemento del tope de la pila <code>s</code></li>
+<li><code>b=s.is_empty()</code>: retorna verdadero si la pila <code>s</code> está vacía, falso si no</li>
+</ul>
+<p>Dado que los elementos salen de la pila en el orden inverso en que ingresaron, esta estructura también se conoce como “lista LIFO,” por “Last-In-First-Out.”</p>
+<section id="implementación-usando-listas-de-python" class="level3">
+<h3>Implementación usando listas de Python</h3>
+<p>Es posible implementar una pila muy fácilmente usando las listas que provee el lenguaje Python:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Pila:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.s<span class="op">=</span>[]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>,x):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.s.append(x)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="bu">len</span>(<span class="va">self</span>.s)<span class="op">&gt;</span><span class="dv">0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.s.pop() <span class="co"># pop de lista, no de Pila</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.s)<span class="op">==</span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Pila()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">10</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">20</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">30</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span></code></pre></div>
+<pre><code>20
+30
+10</code></pre>
+<p>Esta implementación simple posiblemente sirve en la mayoría de los casos, pero si necesitamos poder garantizar su eficiencia, tenemos el problema que la implementación de las listas de Python está fuera de nuestro control, y no podemos garantizar, por ejemplo, que cada una de las operaciones tome tiempo constante.</p>
+<p>Por ese motivo, es útil contar con implementaciones en que sí podamos dar ese tipo de garantía.</p>
+</section>
+<section id="implementación-usando-un-arreglo" class="level3">
+<h3>Implementación usando un arreglo</h3>
+<p>Utilizaremos un arreglo&nbsp;<span class="math inline">s</span>, en donde los elementos de la pila se almacenarán en los casilleros&nbsp;<span class="math inline">0,1,\ldots</span>, con el elemento del tope en el casillero ocupado de más a la derecha. Mantendremos una variable&nbsp;<span class="math inline">n</span> para almacenar el número de elementos presentes en la pila, y el arreglo tendrá un tamaño máximo, el que se podrá especificar opcionalmente al momento de crear la pila.</p>
+<figure>
+<img src="recursos/pila-arreglo.png?raw=1" alt="pila-arreglo" /><figcaption aria-hidden="true">pila-arreglo</figcaption>
+</figure>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Pila:  </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,maxn<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.s<span class="op">=</span>np.zeros(maxn)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>,x):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.n<span class="op">&lt;</span><span class="bu">len</span>(<span class="va">self</span>.s)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.s[<span class="va">self</span>.n]<span class="op">=</span>x</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">+=</span><span class="dv">1</span>     </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.n<span class="op">&gt;</span><span class="dv">0</span> </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">-=</span><span class="dv">1</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.s[<span class="va">self</span>.n]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.n<span class="op">==</span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Pila()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">10</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">20</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">30</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span></code></pre></div>
+<pre><code>20.0
+30.0
+10.0</code></pre>
+<p>Esta implementación es muy eficiente: no solo es evidente que cada operación toma tiempo constante, sino además esa constante es muy pequeña. Sin embargo, tiene la limitación de que es necesario darle un tamaño máximo al arreglo, el cual a la larga puede resultar insuficiente.</p>
+<p>Existe una manera de copiar todos los elementos a un arreglo más grande y seguir operando cuando el arreglo se llena. Si el nuevo arreglo es del doble del tamaño anterior, el costo de copiar todos los elementos se puede <em>amortizar</em> a lo largo de las operaciones, de modo que en <em>promedio</em> sea constante, pero se pierde la propiedad de que las operaciones tomen tiempo constante en el peor caso.</p>
+<p>La siguiente es otra alternativa de implementación, que no sufre de ese problema.</p>
+</section>
+<section id="implementación-usando-una-lista-enlazada" class="level3">
+<h3>Implementación usando una lista enlazada</h3>
+<p>En esta implementación los elementos de la pila se almacenan en una lista de enlace simple (sin cabecera), en que el elemento del tope de la pila es el primero de la lista.</p>
+<figure>
+<img src="recursos/pila-lista.png" alt="pila-lista" /><figcaption aria-hidden="true">pila-lista</figcaption>
+</figure>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NodoLista:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,info,sgte<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.info<span class="op">=</span>info</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sgte<span class="op">=</span>sgte</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Pila:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tope<span class="op">=</span><span class="va">None</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>,x):</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tope<span class="op">=</span>NodoLista(x,<span class="va">self</span>.tope)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.tope <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="va">self</span>.tope.info</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.tope<span class="op">=</span><span class="va">self</span>.tope.sgte</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.tope <span class="kw">is</span> <span class="va">None</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Pila()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">10</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">20</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>a.push(<span class="dv">30</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.pop())</span></code></pre></div>
+<pre><code>20
+30
+10</code></pre>
+</section>
+<section id="aplicaciones-de-pilas" class="level3">
+<h3>Aplicaciones de pilas</h3>
+<section id="evaluación-de-notación-polaca" class="level4">
+<h4>Evaluación de notación polaca</h4>
+<p>Si se tiene una fórmula en notación polaca, se puede calcular su valor usando una pila, inicialmente vacía. Los símbolos de la fórmula se van leyendo de izquierda a derecha, y:</p>
+<ul>
+<li>si el símbolo es un número, se le hace <code>push</code> en la pila</li>
+<li>si el símbolo es un operador, se hacen dos <code>pop</code>, se efectúa la operación indicada entre los dos datos obtenidos, y el resultado se agrega de vuelta a la pila con <code>push</code></li>
+</ul>
+<p>Al terminar, si la fórmula estaba bien formada, debe haber solo un elemento en la pila, que es el resultado de la evaluación de la fórmula.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eval_polaca(formula):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    a<span class="op">=</span>Pila()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> formula.split():</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x.isnumeric():</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            a.push(<span class="bu">int</span>(x))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># tiene que ser un operador</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            v<span class="op">=</span>a.pop()</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            u<span class="op">=</span>a.pop()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> x<span class="op">==</span><span class="st">&quot;+&quot;</span>:</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                w<span class="op">=</span>u<span class="op">+</span>v</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> x<span class="op">==</span><span class="st">&quot;-&quot;</span>:</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                w<span class="op">=</span>u<span class="op">-</span>v</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> x<span class="op">==</span><span class="st">&quot;*&quot;</span>:</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                w<span class="op">=</span>u<span class="op">*</span>v</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> x<span class="op">==</span><span class="st">&quot;/&quot;</span>:</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                w<span class="op">=</span>u<span class="op">/</span>v</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="st">&quot;Operador desconocido:&quot;</span>,x)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            a.push(w)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a.pop()</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>formula<span class="op">=</span><span class="bu">input</span>(<span class="st">&#39;Escriba la fórmula en notación polaca: &#39;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Resultado: &quot;</span>,eval_polaca(formula))</span></code></pre></div>
+<pre><code>Escriba la fórmula en notación polaca: 2 3 + 9 4 2 / - *
+Resultado:  35.0</code></pre>
+</section>
+<section id="recorrido-no-recursivo-de-un-árbol-binario" class="level4">
+<h4>Recorrido no recursivo de un árbol binario</h4>
+<p>Supongamos que queremos recorrer un árbol binario en preorden. En lugar de utilizar un algoritmo recursivo, podemos imaginar que tenermos una “To DO list” en donde almacenamos la lista de nodos que debemos visitar en el futuro. Inicialmente, esta lista contiene solo la raíz. En cada iteración, extraemos un nodo de la lista, lo visitamos, y luego agregamos a la lista a sus dos hijos. Si la lista se mantiene como una pila, el orden del en que se visitan los nodos es exactamente preorden.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Nodo:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, izq, info, der):</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.izq<span class="op">=</span>izq</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.info<span class="op">=</span>info</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.der<span class="op">=</span>der</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Arbol:</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,raiz<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.raiz<span class="op">=</span>raiz</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> preorden(<span class="va">self</span>):</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Preorden no recursivo:&quot;</span>, end<span class="op">=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span>Pila()</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        s.push(<span class="va">self</span>.raiz)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="kw">not</span> s.is_empty():</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>            p<span class="op">=</span>s.pop()</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> p <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(p.info, end<span class="op">=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                s.push(p.der)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                s.push(p.izq)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span></code></pre></div>
+<p>Es importante que las operaciones <code>push</code> se hagan en el orden indicado (derecho-izquierdo), para que de acuerdo a la disciplina LIFO, salga primero el izquierdo y luego el derecho.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Arbol(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    Nodo(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        Nodo(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            Nodo(<span class="va">None</span>,<span class="dv">15</span>,<span class="va">None</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>            <span class="dv">20</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            Nodo(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                Nodo(<span class="va">None</span>,<span class="dv">30</span>,<span class="va">None</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                <span class="dv">35</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                <span class="va">None</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="dv">42</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        Nodo(</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>            Nodo(</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>                Nodo(</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>                    Nodo(<span class="va">None</span>,<span class="dv">65</span>,<span class="va">None</span>),</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">72</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                    Nodo(<span class="va">None</span>,<span class="dv">81</span>,<span class="va">None</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                <span class="dv">90</span>,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>                <span class="va">None</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>            <span class="dv">95</span>,</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">None</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a.preorden()</span></code></pre></div>
+<pre><code>Preorden no recursivo: 42 20 15 35 30 95 90 72 65 81 </code></pre>
+<p>Hay una pequeña optimización que se puede hacer al algoritmo de recorrido no recursivo. Cuando hacemos las dos operaciones <code>push</code> y volvemos a ejecutar el <code>while</code>, sabemos que la pila no está vacía, de modo que esa pregunta es superflua. Además, al hacer el <code>pop</code> sabemos que lo que va a salir de la pila es lo último que se agregó, o sea, <code>p.izq</code>. Por lo tanto, podemos saltarnos tanto la pregunta como el <code>pop</code> e ir directamente al <code>if</code>, el cual por lo tanto se transforma en un <code>while</code>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Arbol:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,raiz<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.raiz<span class="op">=</span>raiz</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> preorden(<span class="va">self</span>):</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Preorden no recursivo optimizado:&quot;</span>, end<span class="op">=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span>Pila()</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        s.push(<span class="va">self</span>.raiz)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="kw">not</span> s.is_empty():</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>            p<span class="op">=</span>s.pop()</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> p <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(p.info, end<span class="op">=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                s.push(p.der)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                p<span class="op">=</span>p.izq</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Arbol(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    Nodo(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        Nodo(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>            Nodo(<span class="va">None</span>,<span class="dv">15</span>,<span class="va">None</span>),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>            <span class="dv">20</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>            Nodo(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                Nodo(<span class="va">None</span>,<span class="dv">30</span>,<span class="va">None</span>),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                <span class="dv">35</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                <span class="va">None</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        <span class="dv">42</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        Nodo(</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            Nodo(</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                Nodo(</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                    Nodo(<span class="va">None</span>,<span class="dv">65</span>,<span class="va">None</span>),</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">72</span>,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>                    Nodo(<span class="va">None</span>,<span class="dv">81</span>,<span class="va">None</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>                <span class="dv">90</span>,</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>                <span class="va">None</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>            <span class="dv">95</span>,</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">None</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>a.preorden()</span></code></pre></div>
+<pre><code>Preorden no recursivo optimizado: 42 20 15 35 30 95 90 72 65 81 </code></pre>
+</section>
+</section>
+</section>
+<section id="colas-queues" class="level2">
+<h2>Colas (“<em>Queues</em>”)</h2>
+<p>Una cola es una lista en que los elementos ingresan por un extremo y salen por el otro. Debido a que los elementos van saliendo en orden de llegada, una cola también se llama “lista FIFO,” por “First-In-First-Out.”</p>
+<figure>
+<img src="recursos/cola.png" alt="cola" /><figcaption aria-hidden="true">cola</figcaption>
+</figure>
+<p>Las dos operaciones básicas son <strong>enq</strong> (encolar), que agrega un elemento al final de todos, y <strong>deq</strong> (desencolar), que extrae el elemento que encabeza la cola. Más precisamente, si <code>q</code> es un objeto de tipo Cola, están disponibles las siguientes operaciones:</p>
+<ul>
+<li><code>q.enq(x)</code>: encola x al final de la cola <code>q</code></li>
+<li><code>x=q.deq()</code>: extrae y retorna el elemento a la cabeza de la cola <code>q</code></li>
+<li><code>b=q.is_empty()</code>: retorna verdadero si la cola <code>q</code>está vacía, falso si no</li>
+</ul>
+<section id="implementación-usando-listas-de-python-1" class="level3">
+<h3>Implementación usando listas de Python</h3>
+<p>Tal como hicimos en el caso de las pilas, es muy simple implementar colas usando las listas de Python, pero no tenemos mucho control sobre la eficiencia del resultado:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cola:</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q<span class="op">=</span>[]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enq(<span class="va">self</span>,x):</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q.insert(<span class="dv">0</span>,x)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> deq(<span class="va">self</span>):</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="bu">len</span>(<span class="va">self</span>.q)<span class="op">&gt;</span><span class="dv">0</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.q.pop()</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.q)<span class="op">==</span><span class="dv">0</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Cola()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">72</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">36</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">20</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">61</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span></code></pre></div>
+<pre><code>72
+36
+20
+61</code></pre>
+</section>
+<section id="implementación-usando-un-arreglo-1" class="level3">
+<h3>Implementación usando un arreglo</h3>
+<p>De manera análoga a lo que hicimos en el caso de la pila, podemos almacenar los&nbsp;<span class="math inline">n</span> elementos de la cola usando posiciones contiguas en un arreglo, por ejemplo, las&nbsp;<span class="math inline">n</span> primeras posiciones. Pero hay un problema: como la cola crece por un extremo y se achica por el otro, ese grupo de posiciones contiguas se va desplazando dentro del arreglo, y después de un rato choca contra el otro extremo. La solución es ver al arreglo como <em>circular</em>, esto es, que si el arreglo tiene tamaño&nbsp;<span class="math inline">maxn</span>, a continuación de la posición&nbsp;<span class="math inline">maxn-1</span> viene la posición&nbsp;<span class="math inline">0</span>. Esto se puede hacer fácilmente usando aritmética módulo&nbsp;<span class="math inline">maxn</span>.</p>
+<p>Para la implementación, utilizaremos un subíndice&nbsp;<span class="math inline">cabeza</span> que apunta al primer elemento de la cola, y una variable&nbsp;<span class="math inline">n</span> que indica cuántos elementos hay en la cola. La siguiente figura muestra dos situaciones en que podría encontrarse el arreglo:</p>
+<figure>
+<img src="recursos/cola-arreglo.png" alt="cola-arreglo" /><figcaption aria-hidden="true">cola-arreglo</figcaption>
+</figure>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cola:  </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,maxn<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q<span class="op">=</span>np.zeros(maxn)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cabeza<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enq(<span class="va">self</span>,x):</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.n<span class="op">&lt;</span><span class="bu">len</span>(<span class="va">self</span>.q)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.q[(<span class="va">self</span>.cabeza<span class="op">+</span><span class="va">self</span>.n)<span class="op">%</span><span class="bu">len</span>(<span class="va">self</span>.q)]<span class="op">=</span>x</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">+=</span><span class="dv">1</span>      </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> deq(<span class="va">self</span>):</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.n<span class="op">&gt;</span><span class="dv">0</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="va">self</span>.q[<span class="va">self</span>.cabeza]</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cabeza<span class="op">=</span>(<span class="va">self</span>.cabeza<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span><span class="bu">len</span>(<span class="va">self</span>.q)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">-=</span><span class="dv">1</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.n<span class="op">==</span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Cola(<span class="dv">3</span>) <span class="co"># para forzar circularidad</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">72</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">36</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">20</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">61</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span></code></pre></div>
+<pre><code>72.0
+36.0
+20.0
+61.0</code></pre>
+</section>
+<section id="implementación-usando-una-lista-enlazada-1" class="level3">
+<h3>Implementación usando una lista enlazada</h3>
+<p>El operar en los dos extremos de la cola sugiere de inmediato el uso de una lista de doble enlace, y esa es una opción posible. Pero, como veremos, se puede implementar una cola con una lista de enlace simple:</p>
+<figure>
+<img src="recursos/cola-lista.png" alt="cola-lista" /><figcaption aria-hidden="true">cola-lista</figcaption>
+</figure>
+<p>Una cosa que complica un poco la programación es que el invariante que se ve a la derecha se cumple solo si la cola es no vacía. Para una cola vacía, los dos punteros (primero y último) son nulos. Por lo tanto, un <code>enq</code> sobre una cola vacía, y un <code>deq</code> que deja una cola vacía serán casos especiales.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NodoLista:</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,info,sgte<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.info<span class="op">=</span>info</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sgte<span class="op">=</span>sgte</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cola:</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.primero<span class="op">=</span><span class="va">None</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ultimo<span class="op">=</span><span class="va">None</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enq(<span class="va">self</span>,x):</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        p<span class="op">=</span>NodoLista(x)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.ultimo <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: <span class="co"># cola no vacía, agregamos al final</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.ultimo.sgte<span class="op">=</span>p</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.ultimo<span class="op">=</span>p</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># la cola estaba vacía</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.primero<span class="op">=</span>p</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.ultimo<span class="op">=</span>p</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> deq(<span class="va">self</span>):</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.primero <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="va">self</span>.primero.info</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.primero <span class="kw">is</span> <span class="kw">not</span> <span class="va">self</span>.ultimo: <span class="co"># hay más de 1 elemento</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.primero<span class="op">=</span><span class="va">self</span>.primero.sgte</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># hay solo 1 elemento, el deq deja la cola vacía</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.primero<span class="op">=</span><span class="va">None</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.ultimo<span class="op">=</span><span class="va">None</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.primero <span class="kw">is</span> <span class="va">None</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Cola()</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">72</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">36</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">20</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>a.enq(<span class="dv">61</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a.deq())</span></code></pre></div>
+<pre><code>72
+36
+20
+61</code></pre>
+</section>
+<section id="aplicaciones-de-colas" class="level3">
+<h3>Aplicaciones de colas</h3>
+<p>Las colas se utilizan en los sistemas operativos siempre que hay algún recurso que no puede ser compartido. Uno de los procesos que lo requieren tiene acceso al recurso, mientras los demás deben esperar en una cola. Un ejemplo de esto son los sistemas de “spooling” para las impresoras.</p>
+<p>También se usan mucho en sistemas de simulación, cuando se deben modelar situaciones del mundo real en que hay colas. Por ejemplo, la caja en un supermercado.</p>
+<p>A continuación veremos una aplicación análoga a la que vimos en el caso de pilas para el recorrido de un árbol binario.</p>
+<section id="recorrido-de-un-árbol-binario-por-niveles" class="level4">
+<h4>Recorrido de un árbol binario por niveles</h4>
+<p>Supongamos que se desea recorrer un árbol binario, visitando sus nodos en orden de su distancia a la raíz. No hay manera de escribir esto de manera recursiva, pero el problema se puede resolver usando el mismo enfoque que utilizamos al recorrer un árbol binario en preorden de manera no recursiva, pero usando una cola en lugar de una pila.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Nodo:</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, izq, info, der):</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.izq<span class="op">=</span>izq</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.info<span class="op">=</span>info</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.der<span class="op">=</span>der</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Arbol:</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,raiz<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.raiz<span class="op">=</span>raiz</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> niveles(<span class="va">self</span>):</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Recorrido por niveles:&quot;</span>, end<span class="op">=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        c<span class="op">=</span>Cola()</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>        c.enq(<span class="va">self</span>.raiz)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="kw">not</span> c.is_empty():</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>            p<span class="op">=</span>c.deq()</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> p <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(p.info, end<span class="op">=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>                c.enq(p.izq)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>                c.enq(p.der)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Arbol(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    Nodo(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>        Nodo(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>            Nodo(<span class="va">None</span>,<span class="dv">15</span>,<span class="va">None</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>            <span class="dv">20</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>            Nodo(</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>                Nodo(<span class="va">None</span>,<span class="dv">30</span>,<span class="va">None</span>),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>                <span class="dv">35</span>,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                <span class="va">None</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        <span class="dv">42</span>,</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        Nodo(</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>            Nodo(</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>                Nodo(</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>                    Nodo(<span class="va">None</span>,<span class="dv">65</span>,<span class="va">None</span>),</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">72</span>,</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>                    Nodo(<span class="va">None</span>,<span class="dv">81</span>,<span class="va">None</span>)</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>                ),</span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>                <span class="dv">90</span>,</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>                <span class="va">None</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>            <span class="dv">95</span>,</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">None</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>a.niveles()</span></code></pre></div>
+<pre><code>Recorrido por niveles: 42 20 95 15 35 90 30 72 65 81 </code></pre>
+</section>
+</section>
+</section>
+<section id="colas-de-prioridad" class="level2">
+<h2>Colas de Prioridad</h2>
+<p>Hay muchas situaciones en que los elementos que esperan en una cola deben ir siendo atendidos no por orden de llegada, sino de acuerdo a algún criterio de <em>prioridad</em>. En esos casos, no nos sirve la cola como la hemos visto, sino que se necesita un nuevo tipo de estructura.</p>
+<p>Una cola de prioridad es un TDA que consiste de un conjunto de datos que poseen un atributo (llamado su <em>prioridad</em>) perteneciente a algún conjunto ordenado, y en el cual se pueden ejecutar dos operaciones básicas: <strong>insertar</strong> un nuevo elemento con una prioridad cualquiera y <strong>extraer</strong> el elemento de máxima prioridad.</p>
+<p>Más específicamente, las operaciones permitidas son:</p>
+<ul>
+<li><code>q.insert(x)</code>: inserta un elemento de prioridad x en la cola de prioridad <code>q</code></li>
+<li><code>x=q.extract_max()</code>: extrae y retorna el elemento de máxima prioridad de la cola de prioridad <code>q</code></li>
+<li><code>b=q.is_empty()</code>: retorna verdadero si la cola de prioridad <code>q</code>está vacía, falso si no</li>
+</ul>
+<p>Definir qué significa tener “máxima prioridad” depende de la aplicación que queramos darle a la cola de prioridad. En los ejemplos de este capítulo, supondremos que mejor prioridad corresponde a un mayor valor numérico, pero por simetría también sería válido el criterio opuesto.</p>
+<section id="implementación-usando-una-lista-desordenada" class="level3">
+<h3>Implementación usando una lista desordenada</h3>
+<p>La implementación más simple consiste en mantener el conjunto como una lista desordenada. Agregar un elemento es trivial, pero encontrar el máximo requiere tiempo&nbsp;<span class="math inline">\Theta(n)</span>.</p>
+<p>La lista se puede mantener ya sea en un arreglo o en una lista enlazada. Para nuestro ejemplo, utilizaremos una lista enlazada con cabecera.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NodoLista:</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,info,sgte<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.info<span class="op">=</span>info</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sgte<span class="op">=</span>sgte</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cola_de_prioridad:</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cabecera<span class="op">=</span>NodoLista(<span class="dv">0</span>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> insert(<span class="va">self</span>,x):</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cabecera.sgte<span class="op">=</span>NodoLista(x,<span class="va">self</span>.cabecera.sgte)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> extract_max(<span class="va">self</span>):</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.cabecera.sgte <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>        p<span class="op">=</span><span class="va">self</span>.cabecera <span class="co"># apunta al previo del candidato a máximo</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>        r<span class="op">=</span><span class="va">self</span>.cabecera.sgte</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> r.sgte <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> r.sgte.info<span class="op">&gt;</span>p.sgte.info:</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>                p<span class="op">=</span>r</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>            r<span class="op">=</span>r.sgte</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span>p.sgte.info <span class="co"># anotamos el valor máximo</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        p.sgte<span class="op">=</span>p.sgte.sgte <span class="co"># eliminamos el nodo con el máximo</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.cabecera.sgte <span class="kw">is</span> <span class="va">None</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Cola_de_prioridad()</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">45</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">12</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">30</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;max=&quot;</span>,a.extract_max())</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">20</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;max=&quot;</span>,a.extract_max())</span></code></pre></div>
+<pre><code>max= 45
+max= 30</code></pre>
+</section>
+<section id="implementación-usando-una-lista-ordenada" class="level3">
+<h3>Implementación usando una lista ordenada</h3>
+<p>Una implementación un poco más compleja consiste en mantener el conjunto como una lista ordenada. Agregar un elemento requiere recorrer la lista para encontrar el punto de inserción (tiempo&nbsp;<span class="math inline">\Theta(n)</span> en el peor caso), pero encontrar el máximo y extrarlo toma tiempo constante si la lista se ordena de mayor a menor.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NodoLista:</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,info,sgte<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.info<span class="op">=</span>info</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sgte<span class="op">=</span>sgte</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cola_de_prioridad:</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cabecera<span class="op">=</span>NodoLista(<span class="dv">0</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> insert(<span class="va">self</span>,x):</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>        p<span class="op">=</span><span class="va">self</span>.cabecera <span class="co"># al final apuntará al previo del punto de inserción</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> p.sgte <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> x<span class="op">&lt;</span>p.sgte.info:</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>            p<span class="op">=</span>p.sgte        </span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>        p.sgte<span class="op">=</span>NodoLista(x,p.sgte)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> extract_max(<span class="va">self</span>):</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.cabecera.sgte <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="va">self</span>.cabecera.sgte.info <span class="co"># anotamos el valor máximo que está en el primer nodo</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cabecera.sgte<span class="op">=</span><span class="va">self</span>.cabecera.sgte.sgte <span class="co"># eliminamos el primer nodo</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_empty(<span class="va">self</span>):</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.cabecera.sgte <span class="kw">is</span> <span class="va">None</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Cola_de_prioridad()</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">45</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">12</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">30</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;max=&quot;</span>,a.extract_max())</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">20</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;max=&quot;</span>,a.extract_max())</span></code></pre></div>
+<pre><code>max= 45
+max= 30</code></pre>
+<p>Las dos implementaciones que hemos visto están en extremos opuestos desde el punto de vista de su eficiencia. En ambas, una oparación toma tiempo constante (<span class="math inline">\Theta(1)</span>) mientras la otra toma tiempo lineal (<span class="math inline">\Theta(n)</span>).</p>
+<p>Veremos a continuación que es posible diseñar una estructura que equilibre de mejor forma el costo de las dos operaciones.</p>
+</section>
+<section id="implementación-usando-un-heap" class="level3">
+<h3>Implementación usando un <em>Heap</em></h3>
+<p>Un heap es un árbol binario de una forma especial, que permite su almacenamiento sin usar punteros.</p>
+<p>Este árbol se caracteriza porque tiene todos sus niveles llenos, excepto posiblemente el último, y en ese último nivel, los nodos están lo más a la izquierda posible.</p>
+<figure>
+<img src="recursos/heap-arbol.png" alt="heap-arbol" /><figcaption aria-hidden="true">heap-arbol</figcaption>
+</figure>
+<p>Un árbol que cumpla esta condición diremos que tiene “forma de heap.”</p>
+<p>Los números bajo cada nodo corresponde a una numeración por niveles, y esa numeración se utiliza para almacenar cada elemento en el casillero respectivo de un arreglo:</p>
+<figure>
+<img src="recursos/heap-arreglo.png" alt="heap-arreglo" /><figcaption aria-hidden="true">heap-arreglo</figcaption>
+</figure>
+<p>Este arreglo contiene toda la información necesaria para representar al árbol. En efecto, tenemos que la raíz está en el casillero&nbsp;<span class="math inline">0</span>, y además</p>
+<p><span class="math display">
+\begin{align}
+\text{hijos del nodo }j &amp;= \{2j+1,2j+2\} \\
+\text{padre del nodo }k &amp;= \left\lfloor \frac{k-1}{2} \right\rfloor
+\end{align}
+</span></p>
+<p>Si hay&nbsp;<span class="math inline">n</span> casilleros ocupados en el arreglo, cualquier subíndice que sea mayor o igual a&nbsp;<span class="math inline">n</span> corresponde a un nodo inexistente.</p>
+<p>Un heap puede utilizarse para implementar una cola de prioridad almacenando los datos de modo que las llaves estén siempre ordenadas de arriba a abajo (a diferencia de un árbol de búsqueda binaria, que ordena sus llaves de izquierda a derecha). En otras palabras, el padre debe tener siempre mejor prioridad que sus hijos. Un árbol que cumple esta condición diremos que tiene “orden de heap,” y también se dice que es un “árbol de prioridad.”</p>
+<p>Por lo tanto, un heap debe satisfacer un invariante consistente en dos condiciones:</p>
+<ul>
+<li>Condición estructural: el árbol debe tener “forma de heap”</li>
+<li>Condición de orden: el árbol debe tener “orden de heap”</li>
+</ul>
+<section id="inserción" class="level4">
+<h4>Inserción</h4>
+<p>La inserción se realiza agregando el nuevo elemento en la primera posición libre del heap, esto es, el próximo nodo que debería aparecer en el recorrido por niveles o, equivalentemente, un casillero que se agrega al final del arreglo.</p>
+<p>Después de agregar este elemento, la condición estructural se cumple, pero la condición de orden no tiene por qué cumplirse. Para resolver este problema, si el nuevo elemento es mayor que su padre, se intercambia con él, y ese proceso se repite mientras sea necesario. Una forma de describir esto es diciendo que el nuevo elemento “trepa” en el árbol hasta alcanzar el nivel correcto según su prioridad.</p>
+<figure>
+<img src="recursos/heap-ins.gif" alt="heap-ins" /><figcaption aria-hidden="true">heap-ins</figcaption>
+</figure>
+<p>Como la altura del árbol es&nbsp;<span class="math inline">\log_2{n}</span> y en cada nivel se hace un trabajo constante, el tiempo que demora esta operación en el peor caso es&nbsp;<span class="math inline">\Theta(\log{n})</span>.</p>
+</section>
+<section id="extracción-del-máximo" class="level4">
+<h4>Extracción del máximo</h4>
+<p>El máximo evidentemente está en la raíz del árbol (casillero 0 del arreglo). Al sacarlo de ahí, podemos imaginar que ese lugar queda vacante. Para llenarlo, tomamos al último elemento del heap y lo trasladamos al lugar vacante. En caso de que no esté bien ahí de acuerdo a su prioridad (¡que es lo más probable!), lo hacemos descender intercambiándolo siempre con el mayor de sus hijos. Decimos que este elemento “se hunde” hasta su nivel de prioridad.</p>
+<figure>
+<img src="recursos/heap-extract.gif" alt="heap-extract" /><figcaption aria-hidden="true">heap-extract</figcaption>
+</figure>
+<p>Esta operación también demora un tiempo proporcional a la altura del árbol en el peor caso, esto es,&nbsp;<span class="math inline">\Theta(\log{n})</span>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> trepar(a,j): <span class="co"># El elemento a[j] trepa hasta su nivel de prioridad </span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> j<span class="op">&gt;=</span><span class="dv">1</span> <span class="kw">and</span> a[j]<span class="op">&gt;</span>a[(j<span class="op">-</span><span class="dv">1</span>)<span class="op">//</span><span class="dv">2</span>]:</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>        (a[j],a[(j<span class="op">-</span><span class="dv">1</span>)<span class="op">//</span><span class="dv">2</span>])<span class="op">=</span>(a[(j<span class="op">-</span><span class="dv">1</span>)<span class="op">//</span><span class="dv">2</span>],a[j]) <span class="co"># intercambiamos con el padre</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>        j<span class="op">=</span>(j<span class="op">-</span><span class="dv">1</span>)<span class="op">//</span><span class="dv">2</span> <span class="co"># subimos al lugar del padre</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hundir(a,j,n): <span class="co"># El elemento a[j] se hunde hasta su nivel de prioridad</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="dv">2</span><span class="op">*</span>j<span class="op">+</span><span class="dv">1</span><span class="op">&lt;</span>n: <span class="co"># mientras tenga al menos 1 hijo</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>        k<span class="op">=</span><span class="dv">2</span><span class="op">*</span>j<span class="op">+</span><span class="dv">1</span> <span class="co"># el hijo izquierdo</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> k<span class="op">+</span><span class="dv">1</span><span class="op">&lt;</span>n <span class="kw">and</span> a[k<span class="op">+</span><span class="dv">1</span>]<span class="op">&gt;</span>a[k]: <span class="co"># el hijo derecho existe y es mayor</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>            k<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a[j]<span class="op">&gt;=</span>a[k]: <span class="co"># tiene mejor prioridad que ambos hijos</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>        (a[j],a[k])<span class="op">=</span>(a[k],a[j]) <span class="co"># se intercambia con el mayor de los hijos</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>        j<span class="op">=</span>k <span class="co"># bajamos al lugar del mayor de los hijos</span></span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Heap:</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,maxn<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.a<span class="op">=</span>np.zeros(maxn)</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> insert(<span class="va">self</span>,x):</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.n<span class="op">&lt;</span><span class="bu">len</span>(<span class="va">self</span>.a)</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.a[<span class="va">self</span>.n]<span class="op">=</span>x    </span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>        trepar(<span class="va">self</span>.a,<span class="va">self</span>.n)</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">+=</span><span class="dv">1</span>       </span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> extract_max(<span class="va">self</span>):</span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> <span class="va">self</span>.n<span class="op">&gt;</span><span class="dv">0</span></span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="va">self</span>.a[<span class="dv">0</span>] <span class="co"># esta variable lleva el máximo, el casillero 0 queda vacante</span></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n<span class="op">-=</span><span class="dv">1</span>   <span class="co"># achicamos el heap</span></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.a[<span class="dv">0</span>]<span class="op">=</span><span class="va">self</span>.a[<span class="va">self</span>.n] <span class="co"># movemos el elemento sobrante hacia el casillero vacante</span></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>        hundir(<span class="va">self</span>.a,<span class="dv">0</span>,<span class="va">self</span>.n)</span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> imprimir(<span class="va">self</span>):</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="va">self</span>.a[<span class="dv">0</span>:<span class="va">self</span>.n])</span></code></pre></div>
+<p>Para poder visualizar el efecto de cada operación, agregamos una operación <code>imprimir</code> que muestra el contenido del arreglo.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Heap(<span class="dv">10</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">45</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">12</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">30</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;max=&quot;</span>,a.extract_max())</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">20</span>)</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;max=&quot;</span>,a.extract_max())</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span></code></pre></div>
+<pre><code>[45.]
+[45. 12.]
+[45. 12. 30.]
+max= 45.0
+[30. 12.]
+[30. 12. 20.]
+max= 30.0
+[20. 12.]</code></pre>
+<hr />
+</section>
+</section>
+<section id="ejercicio-5.1" class="level3">
+<h3>Ejercicio 5.1</h3>
+<p>Agregar a la clase Heap un método <code>modificar(k,x)</code> que al ser invocado, cambie la prioridad del elemento del casillero <code>k</code>, dándole como nuevo valor <code>x</code> y asegurando que el heap siga cumpliendo las restricciones de orden. Esta operación debe funcionar en tiempo&nbsp;<span class="math inline">O(\log{n})</span> en el peor caso. Escriba a continuación la definición de la clase <code>Heap</code>incluyendo esta nueva operación, y pruébela con las instrucciones que aparecen en el casillero siguiente.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span>Heap(<span class="dv">20</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">55</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">50</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">70</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">12</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">36</span>)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">10</span>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">21</span>)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">24</span>)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">20</span>)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>a.insert(<span class="dv">62</span>)</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>a.modificar(<span class="dv">4</span>,<span class="dv">65</span>)</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>a.modificar(<span class="dv">3</span>,<span class="dv">15</span>)</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>a.imprimir()</span></code></pre></div>
+<pre><code>[70. 62. 55. 24. 50. 10. 21. 12. 20. 36.]</code></pre>
+<hr />
+</section>
+<section id="ordenando-con-una-cola-de-prioridad" class="level3">
+<h3>Ordenando con una cola de prioridad</h3>
+<p>Las colas de prioridad tienen múltiples aplicaciones, algunas de las cuales veremos más adelante en este curso.</p>
+<p>Una de las aplicaciones más importantes es para resolver el problema de la ordenación. Dada cualquier implementaciónde una cola de prioridad, se la puede utilizar para construir un algoritmo de ordenación, de la siguiente manera:</p>
+<ul>
+<li>Crear una cola de prioridad vacía e insertar en ella todos los elementos del conjunto a ordenar</li>
+<li>Luego ir extrayendo máximos sucesivamente. Los elementos irán saliendo de mayor a menor.</li>
+</ul>
+<p>Para las dos primeras implementaciones de colas de prioridad que vimos (conjunto desordenado y conjunto ordenado) el algoritmo resultate demora tiempo&nbsp;<span class="math inline">\Theta(n^2)</span> en el peor caso (y correspone a lso algoritmos de ordenación por selección y ordenación por inserción, respectivamente.</p>
+<p>En cambio, si se utiliza un heap, el algoritmo resultante demora tiempo&nbsp;<span class="math inline">\Theta(n\log{n})</span> en el peor caso y se llama <em>Heapsort</em>. A continuación veremos una versión de Heapsort construída de acuerdo a estas ideas, y más adelante en el curso volveremos sobre el tema, porque es posible optimizar aspectos importantes del algoritmo.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> Heapsort(a): <span class="co"># Versión preliminar</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(a)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    h<span class="op">=</span>Heap(n)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fase 1: insertamos los elementos en un heap</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,n):</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>        h.insert(a[k])</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fase 2: extraemos el máximo sucesivamente</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>        a[k]<span class="op">=</span>h.extract_max()</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.random.random(<span class="dv">6</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>Heapsort(a)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span></code></pre></div>
+<pre><code>[0.84809569 0.60699999 0.8400833  0.76749145 0.18499666 0.09499075]
+[0.09499075 0.18499666 0.60699999 0.76749145 0.8400833  0.84809569]</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</section>
+</section>
+</section>
+
+<div id="lastupdate">
+Last updated: jue mar  4 15:11:41 -05 2021
+</div>
+</article>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

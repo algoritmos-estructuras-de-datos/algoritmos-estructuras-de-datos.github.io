@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>shared-macros</title>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+
+
+
+<div id="collapsiblemenu">
+  <button class="collapsible">
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+  </button>
+  <div class="content">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    </ul>
+    <ul>
+    <li><a href="#diseño-de-algoritmos-eficientes">3 Diseño de Algoritmos Eficientes</a>
+    <ul>
+    <li><a href="#dividir-para-reinar">Dividir para Reinar</a></li>
+    <li><a href="#programación-dinámica">Programación Dinámica</a></li>
+    <li><a href="#algoritmos-avaros-greedy-algorithms">Algoritmos Avaros (<em>Greedy Algorithms</em>)</a></li>
+    <li><a href="#backtracking">Backtracking</a></li>
+    </ul></li>
+    </ul>
+  </div>
+</div>
+
+
+<section id="diseño-de-algoritmos-eficientes" class="level1">
+<h1>3 Diseño de Algoritmos Eficientes</h1>
+<p>En este capítulo veremos un conjunto de ideas que permiten diseñar algoritmos que, en muchos casos, son de los más eficientes que se conocen para sus respectivos problemas.</p>
+<section id="dividir-para-reinar" class="level2">
+<h2>Dividir para Reinar</h2>
+<p>Este es un método de diseño de algoritmos que se basa en subdividir el problema en sub-problemas, resolverlos recursivamente, y luego combinar las soluciones de los sub-problemas para construir la solución del problema original. Es necesario que los subproblemas tengan la misma estructura que el problema original, de modo que se pueda aplicar la recursividad.</p>
+<section id="ejemplo-multiplicación-de-polinomios" class="level3">
+<h3>Ejemplo: Multiplicación de Polinomios</h3>
+<p>Supongamos que tenemos dos polinomios&nbsp;<span class="math inline">A(x)</span> y&nbsp;<span class="math inline">B(x)</span>, cada uno de grado&nbsp;<span class="math inline">n-1</span>:</p>
+<p><span class="math display">
+A(x) = a_0+a_1 x+a_2 x^2 + \ldots + a_{n-1}x^{n-1}
+</span> <span class="math display">
+B(x) = b_0+b_1 x+b_2 x^2 + \ldots + b_{n-1}x^{n-1}
+</span></p>
+<p>representados por sus respectivos arreglos de coeficientes&nbsp;<span class="math inline">a[0],\ldots,a[n-1]</span> y&nbsp;<span class="math inline">b[0],\ldots,b[n-1]</span>.</p>
+<p>El problema consiste en calcular los coeficientes&nbsp;<span class="math inline">c[0],\ldots,c[2n-2]</span> del polinomio producto&nbsp;<span class="math inline">C(x)=A(x)B(x)</span>.</p>
+<p>Por ejemplo,</p>
+<p><span class="math display">
+\begin{align}
+A(x) &amp;= 2+3x-6x^2+x^3\\
+B(x) &amp;= 1-x+3x^2+x^3\\
+C(x) &amp;= A(x)B(x) = 2+x-3x^2+18x^3-16x^4-3x^5+x^6
+\end{align}
+</span></p>
+<p>La manera obvia de resolver este problema es multiplicando cada término de&nbsp;<span class="math inline">A(x)</span> por cada término de&nbsp;<span class="math inline">B(x)</span> y acumulando los resultados que corresponden a la misma potencia de&nbsp;<span class="math inline">x</span>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multpol(a, b):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(a)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">len</span>(b)<span class="op">==</span>n</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>np.zeros(<span class="dv">2</span><span class="op">*</span>n<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,n):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,n):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            c[i<span class="op">+</span>j]<span class="op">+=</span>a[i]<span class="op">*</span>b[j]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>multpol(np.array([<span class="dv">2</span>,<span class="dv">3</span>,<span class="op">-</span><span class="dv">6</span>,<span class="dv">1</span>]), np.array([<span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">1</span>]))</span></code></pre></div>
+<pre><code>array([  2.,   1.,  -3.,  18., -16.,  -3.,   1.])</code></pre>
+<p>Evidentemente, este algoritmo demora tiempo&nbsp;<span class="math inline">O(n^2)</span>. ¿Es posible hacerlo más rápido? Para esto, aplicaremos la técnica de <em>dividir para reinar</em>.</p>
+<p>Supongamos que&nbsp;<span class="math inline">n</span> es par, y dividamos los polinomios en dos partes, separando las potencias bajas de las altas. Por ejemplo, si</p>
+<p><span class="math display">
+A(x)=2+3x-6x^2+x^3
+</span></p>
+<p>lo podemos reescribir como</p>
+<p><span class="math display">
+A(x)=(2+3x) + (-6+3x)x^2
+</span></p>
+<p>En general, podemos reescribir&nbsp;<span class="math inline">A(x)</span> y&nbsp;<span class="math inline">B(x)</span> como</p>
+<p><span class="math display">
+A(x) = A&#39;(x)+A&#39;&#39;(x)x^{n/2}
+</span> <span class="math display">
+B(x) = B&#39;(x)+B&#39;&#39;(x)x^{n/2}
+</span></p>
+<p>y entonces (omitiendo los “<span class="math inline">(x)</span>” para simplificar la notación),</p>
+<p><span class="math display">
+C = A&#39;B&#39;+(A&#39;B&#39;&#39;+A&#39;&#39;B&#39;)x^{n/2}+A&#39;&#39;B&#39;&#39;x^n
+</span></p>
+<p>Esto se puede implementar con 4 multiplicaciones recursivas, cada una involucrando polinomios de la mitad del tamaño. Nótese que las multiplicaciones por potencias de&nbsp;<span class="math inline">x</span> son solo realineaciones de los arreglos de coeficientes, de modo que son “gratis.”</p>
+<p>Si llamamos&nbsp;<span class="math inline">T(n)</span> al número total de operaciones, éste obedece la ecuación de recurrencia</p>
+<p><span class="math display">
+T(n) = 4T \left(\frac{n}{2}\right)+Kn
+</span></p>
+<p>para alguna constante K.</p>
+<p>Por el Teorema Maestro, con&nbsp;<span class="math inline">p=4</span>,&nbsp;<span class="math inline">q=2</span>,&nbsp;<span class="math inline">r=1</span>, tenemos</p>
+<p><span class="math display">
+T(n)=\Theta(n^2)
+</span></p>
+<p>lo cual no es mejor que el algoritmo anterior.</p>
+<p>Afortunadamente, hay una manera de obtener un algoritmo realmente más eficiente. Si calculamos</p>
+<p><span class="math display">
+\begin{align}
+D &amp;= (A&#39;+A&#39;&#39;)(B&#39;+B&#39;&#39;)\\
+E &amp;= A&#39;B&#39;\\
+F &amp;= A&#39;&#39;B&#39;&#39;
+\end{align}
+</span></p>
+<p>podemos construir el polinomio&nbsp;<span class="math inline">C</span> de la manera siguiente:</p>
+<p><span class="math display">
+C = E+(D-E-F)x^{n/2}+Fx^n
+</span></p>
+<p>¡lo cual utiliza solo 3 multiplicaciones recursivas!</p>
+<p><span class="math display">
+T(n) = 3T \left(\frac{n}{2}\right)+Kn
+</span></p>
+<p>Usando nuevamente el Teorema Maestro, esta vez con&nbsp;<span class="math inline">p=3</span>, tenemos que</p>
+<p><span class="math display">
+T(n)=\Theta(n^{\log_2{3}}) \approx \Theta(n^{1.59})
+</span></p>
+<p>Éste se llama el <em>Algoritmo de Karatsuba</em>.</p>
+<hr />
+</section>
+<section id="ejercicio-3.1" class="level3">
+<h3>Ejercicio 3.1</h3>
+<p>Si tenemos dos números complejos</p>
+<p><span class="math display">
+\begin{align}
+u&amp;=a+bi\\
+v&amp;=c+di
+\end{align}
+</span></p>
+<p>podemos calcular su producto</p>
+<p><span class="math display">
+uv=(ac-bd)+(ad+bc)i
+</span></p>
+<p>haciendo 4 multiplicación de números reales.</p>
+<p>Encuentre una forma de realizar este cálculo haciendo solo 3 multiplicaciones de números reales.</p>
+<hr />
+</section>
+</section>
+<section id="programación-dinámica" class="level2">
+<h2>Programación Dinámica</h2>
+<p>Hay ocasiones en que la simple aplicación de la recursividad conduce a algoritmos muy ineficientes, pero es posible evitar esa ineficiencia con un uso adecuado de memoria.</p>
+<section id="ejemplo-cálculo-de-un-número-de-fibonacci" class="level3">
+<h3>Ejemplo: Cálculo de un número de Fibonacci</h3>
+<p>Recordemos la ecuación de Fibonacci</p>
+<p><span class="math display">
+\begin{align}
+f_n &amp;= f_{n-1}+f_{n-2} \text{ para } n\ge 2\\
+f_0 &amp;= 0\\
+f_1 &amp;= 1
+\end{align}
+</span></p>
+<p>algunos de cuyos valores son:</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">𝑛</span></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+<th>17</th>
+<th>18</th>
+<th>19</th>
+<th>20</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">f_n</span></td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+<td>13</td>
+<td>21</td>
+<td>34</td>
+<td>55</td>
+<td>89</td>
+<td>144</td>
+<td>233</td>
+<td>377</td>
+<td>610</td>
+<td>987</td>
+<td>1597</td>
+<td>2584</td>
+<td>4181</td>
+<td>6765</td>
+</tr>
+</tbody>
+</table>
+<p>Queremos resolver el siguiente problema: dado un&nbsp;<span class="math inline">n</span>, calcular&nbsp;<span class="math inline">f_n</span>.</p>
+<p>A partir de la ecuación de recurrencia podemos escribir de inmediato una solución recursiva:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fibonacci(n):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n<span class="op">&lt;=</span><span class="dv">1</span>:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> fibonacci(n<span class="op">-</span><span class="dv">1</span>)<span class="op">+</span>fibonacci(n<span class="op">-</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fibonacci(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>55</code></pre>
+<p>El problema es que, para&nbsp;<span class="math inline">n</span> grande, este algoritmo es horriblemente ineficiente. El motivo de esto es que, a medida que se van ejecutando las llamadas recursivas, un mismo número de Fibonacci puede calcularse múltiples veces, independientemente de si ya se ha calculado antes.</p>
+<p>Una forma de dimensionar esta ineficiencia es calcular, por ejemplo, el número de operaciones de suma que se hacen al calcular <code>fibonacci(n)</code>. Llamemos&nbsp;<span class="math inline">s_n</span> a ese número de sumas. Es fácil ver que</p>
+<p><span class="math display">
+\begin{align}
+s_n &amp;= s_{n-1}+s_{n-2}+1 \text{ para } n\ge 2\\
+s_0 &amp;= 0\\
+s_1 &amp;= 0
+\end{align}
+</span></p>
+<p>Si definimos una nueva función incógnita&nbsp;<span class="math inline">t_n=s_n+1</span>, tenemos que</p>
+<p><span class="math display">
+\begin{align}
+t_n &amp;= t_{n-1}+t_{n-2} \text{ para } n\ge 2\\
+t_0 &amp;= 1\\
+t_1 &amp;= 1
+\end{align}
+</span></p>
+<p>Esta es la misma ecuación de Fibonacci, comenzando un paso más adelante, y por lo tanto su solución es&nbsp;<span class="math inline">t_n=f_{n+1}</span>, y el número de sumas es&nbsp;<span class="math inline">s_n=f_{n+1}-1=\Theta(\phi^n)</span>. Conclusión: ¡el tiempo que demora la ejecución de <code>fibonacci(n)</code> crece exponencialmente!</p>
+</section>
+<section id="evitando-la-ineficiencia-memoización" class="level3">
+<h3>Evitando la ineficiencia: Memoización</h3>
+<p>La ineficiencia de la solución recursiva se debe, como dijimos antes, a que un mismo valor de la función&nbsp;<span class="math inline">f</span> se calcula y recalcula múltiples veces. Una forma de evitar esto es incorporar una memoria auxiliar, en forma de un arreglo&nbsp;<span class="math inline">F</span> inicializado con ceros. La primera vez que se pide calcular un&nbsp;<span class="math inline">f_n</span> dado, lo hacemos recursivamente, pero dejamos el valor anotado en&nbsp;<span class="math inline">F[n]</span>. Las siguientes veces lo tomamos del arreglo, sin incurrir de nuevo en el costo del cálculo recursivo. Esta forma de utilizar una memoria para almacenar resultados calculados previamente, para evitar recalcularlos, se llama una <em>memoria caché</em>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fibonacci(n):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    F<span class="op">=</span>np.zeros(n<span class="op">+</span><span class="dv">1</span>,dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fib_rec(k):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> k<span class="op">&gt;</span><span class="dv">0</span> <span class="kw">and</span> F[k]<span class="op">==</span><span class="dv">0</span>: <span class="co"># primera vez que se calcula</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> k<span class="op">&lt;=</span><span class="dv">1</span>:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                F[k]<span class="op">=</span>k</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                F[k]<span class="op">=</span>fib_rec(k<span class="op">-</span><span class="dv">1</span>)<span class="op">+</span>fib_rec(k<span class="op">-</span><span class="dv">2</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> F[k]</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fib_rec(n)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fibonacci(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>55</code></pre>
+<p>La introducción de esta memoria auxiliar tiene como efecto transformar el algoritmo original, de tiempo exponencial, en un algoritmo de tiempo lineal&nbsp;<span class="math inline">\Theta(n)</span>.</p>
+</section>
+<section id="evitando-la-ineficiencia-tabulación" class="level3">
+<h3>Evitando la ineficiencia: Tabulación</h3>
+<p>La técnica de <em>memoización</em> va llenando el arreglo auxiliar&nbsp;<span class="math inline">F</span> a medida que sus valores son solicitados. Este método es bastante general, pero se puede mejorar si logramos encontrar un orden para ir llenando el arreglo&nbsp;<span class="math inline">F</span> que garantice que cuando se requiere el valor de un cierto casillero, éste ya está llenado.</p>
+<p>En el caso de Fibonacci, esto se logra simplemente al ir llenando los casilleros&nbsp;<span class="math inline">F[k]</span> en orden creciente de&nbsp;<span class="math inline">k</span>. Esta técnica se llama <em>tabulación</em>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fibonacci(n):</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    F<span class="op">=</span>np.zeros(n<span class="op">+</span><span class="dv">1</span>,dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    F[<span class="dv">0</span>]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    F[<span class="dv">1</span>]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        F[k]<span class="op">=</span>F[k<span class="op">-</span><span class="dv">1</span>]<span class="op">+</span>F[k<span class="op">-</span><span class="dv">2</span>]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> F[n]</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fibonacci(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>55</code></pre>
+<p>Es evidente que el tiempo que demora este algoritmo es&nbsp;<span class="math inline">\Theta(n)</span>.</p>
+</section>
+<section id="derrotando-al-algoritmo-lineal" class="level3">
+<h3>Derrotando al algoritmo lineal</h3>
+<p>Si bien parecería que para calcular&nbsp;<span class="math inline">f_n</span> es necesario calcular previamente todos los&nbsp;<span class="math inline">f_k</span>, para&nbsp;<span class="math inline">0\le k&lt;n</span>, en realidad esto no es cierto.</p>
+<p>Introduzcamos una función incógnita adicional&nbsp;<span class="math inline">g_n</span> en la ecuación de Fibonacci, definiéndola como&nbsp;<span class="math inline">g_n=f_{n-1}</span>. La ecuación puede reescribirse así:</p>
+<p><span class="math display">
+\begin{align}
+f_n &amp;= f_{n-1}+g_{n-1}\\
+g_n &amp;= f_{n-1}\\
+f_1 &amp;=1\\
+g_1 &amp;=0
+\end{align}
+</span></p>
+<p>Esto se puede reescribir en forma matricial:</p>
+<p><span class="math display">
+\begin{pmatrix}
+f_n \\
+g_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 1\\
+1 &amp; 0
+\end{pmatrix}
+\begin{pmatrix}
+f_{n-1} \\
+g_{n-1}
+\end{pmatrix}
+\text{ para }n\ge 2
+</span></p>
+<p>con la condición inicial</p>
+<p><span class="math display">
+\begin{pmatrix}
+f_1 \\
+g_1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+</span></p>
+<p>Este ecuación es muy simple de resolver “desenrrollándola,” y su solución es</p>
+<p><span class="math display">
+\begin{pmatrix}
+f_n \\
+g_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 1\\
+1 &amp; 0
+\end{pmatrix}^{n-1}
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+</span></p>
+<p>Por lo tanto, para resolver el problema del calcular&nbsp;<span class="math inline">f_n</span>, basta evaluar esta fórmula matricial y luego tomar la primera componente del vector resultante.</p>
+<p>Recordando que para la elevación a potencia podemos usar el algoritmo binario, la evaluación de la fórmula se puede hacer en tiempo logarítmico, y por lo tanto el problema de calcular&nbsp;<span class="math inline">f_n</span> se puede resolver en tiempo&nbsp;<span class="math inline">\Theta(\log{n})</span>.</p>
+<p>La siguiente es una versión del algoritmo <code>potencia</code> adaptada para calcular&nbsp;<span class="math inline">B=A^n</span> cuando&nbsp;<span class="math inline">A</span> es una matriz cuadrada:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> potencia(A, n):</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    B<span class="op">=</span>np.eye(<span class="bu">len</span>(A),dtype<span class="op">=</span><span class="bu">int</span>) <span class="co"># matriz identidad</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    k<span class="op">=</span>n</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    C<span class="op">=</span>A</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> k<span class="op">&gt;</span><span class="dv">0</span>:</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> k<span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span>:</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            C<span class="op">=</span>np.dot(C,C) <span class="co"># C=C**2</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>            k<span class="op">//=</span><span class="dv">2</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        B<span class="op">=</span>np.dot(B,C) <span class="co"># B=C*C</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        k<span class="op">-=</span><span class="dv">1</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> B</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fibonacci(n):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    F<span class="op">=</span>np.dot(potencia(np.array([[<span class="dv">1</span>,<span class="dv">1</span>],[<span class="dv">1</span>,<span class="dv">0</span>]]),n<span class="op">-</span><span class="dv">1</span>), np.array([[<span class="dv">1</span>],[<span class="dv">0</span>]]))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> F[<span class="dv">0</span>,<span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fibonacci(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>55</code></pre>
+<hr />
+</section>
+<section id="ejercicio-3.2" class="level3">
+<h3>Ejercicio 3.2</h3>
+<p>Si&nbsp;<span class="math inline">f_n</span> son los números de Fibonacci, demuestre que, para todo&nbsp;<span class="math inline">n\ge 1</span>,</p>
+<p><span class="math display">
+\begin{pmatrix}
+1 &amp; 1\\
+1 &amp; 0
+\end{pmatrix}^n
+=
+\begin{pmatrix}
+f_{n+1} &amp; f_n \\
+f_n &amp; f_{n-1}
+\end{pmatrix}
+</span></p>
+<hr />
+</section>
+<section id="ejemplo-encontrar-la-parentización-óptima-para-multiplicación-de-n-matrices" class="level3">
+<h3>Ejemplo: Encontrar la parentización óptima para multiplicación de <span class="math inline">n</span> matrices</h3>
+<p>Hemos visto que las técnicas de <em>memoización</em> y de <em>tabulación</em> nos permiten construir algoritmos eficientes en algunos problemas en que la recursividad aplicada directamente daría soluciones muy ineficientes.</p>
+<p>Cuando estas técnicas se aplican a problemas de optimización, hablamos de <em>programación dinámica</em>.</p>
+<p>Consideremos el siguiente problema: Dadas tres matrices&nbsp;<span class="math inline">A</span>,&nbsp;<span class="math inline">B</span> y&nbsp;<span class="math inline">C</span> para las cuales se desea calcular su producto&nbsp;<span class="math inline">A B C</span>, ¿qué es más eficiente, calcular&nbsp;<span class="math inline">(A B)C</span> o calcular&nbsp;<span class="math inline">A (B C)</span>?</p>
+<p>La respuesta depende de las dimensiones de las matrices involucradas. Si una matriz&nbsp;<span class="math inline">A</span> es de&nbsp;<span class="math inline">p\times q</span> y otra matriz&nbsp;<span class="math inline">B</span> es de&nbsp;<span class="math inline">q\times r</span>, calcular su producto&nbsp;<span class="math inline">A B</span> utilizando el algoritmo usual requiere hacer&nbsp;<span class="math inline">pqr</span> multiplicaciones escalares, y un número similar de sumas.</p>
+<p>Para nuestro problema de calcular&nbsp;<span class="math inline">ABC</span>, supongamos por ejemplo que&nbsp;<span class="math inline">A</span> es de&nbsp;<span class="math inline">100\times 10</span>,&nbsp;<span class="math inline">B</span> de&nbsp;<span class="math inline">10\times 100</span> y&nbsp;<span class="math inline">C</span> de&nbsp;<span class="math inline">100\times 10</span>, tenemos que</p>
+<ul>
+<li>Calcular <span class="math inline">(AB)C</span> requiere <span class="math inline">100\times 10\times 100+100\times 100\times 10=200.000</span> multiplicaciones</li>
+<li>Calcular <span class="math inline">A(BC)</span> requiere <span class="math inline">10\times 100\times 10+100\times 10\times 10=20.000</span> multiplicaciones</li>
+</ul>
+<p>La respuesta, por lo tanto, es que para las dimensiones dadas, la parentización óptima es&nbsp;<span class="math inline">A(BC)</span>.</p>
+<p>Consideremos ahora el problema general. Dadas&nbsp;<span class="math inline">n</span> matrices&nbsp;<span class="math inline">A_1, A_2, \ldots, A_n</span> y números&nbsp;<span class="math inline">p[0], p[1], \ldots, p[n]</span> tales que la matriz&nbsp;<span class="math inline">A_i</span> es de&nbsp;<span class="math inline">p[i-1]\times p[i]</span>, encontrar el costo (en número de multiplicaciones) de la parentización óptima para calcular el producto</p>
+<p><span class="math display">
+A_1 A_2 \cdots A_n
+</span></p>
+<p>Generalicemos el problema para poder abordarlo recursivamente (o inductivamente). Supongamos que el problema es encontrar el costo de la parentización óptima para calcular el producto</p>
+<p><span class="math display">
+A_i \cdots A_j
+</span></p>
+<p>para&nbsp;<span class="math inline">1\le i\le j\le n</span>. Llamemos&nbsp;<span class="math inline">m[i,j]</span> a este costo óptimo.</p>
+<p>En el caso&nbsp;<span class="math inline">i=j</span> el producto involucra a una sola matriz, así que, trivialmente,&nbsp;<span class="math inline">m[i,i]=0</span>. En el caso&nbsp;<span class="math inline">i&lt;j</span>, supongamos que parentizamos de modo que el producto se factorice como</p>
+<p><span class="math display">
+(A_i \cdots A_k)(A_{k+1}\cdots A_j)
+</span></p>
+<p>para algún&nbsp;<span class="math inline">k\in [i..j-1]</span>. Suponiendo que cada producto parentizado se ha calculado en forma óptima, el costo total sería</p>
+<p><span class="math display">
+m[i,k]+m[k+1,j]+p[i-1]\times p[k]\times p[j]
+</span></p>
+<p>Esto no es necesariamente óptimo para el producto&nbsp;<span class="math inline">A_i \cdots A_j</span>, porque podríamos haber elegido el valor equivocado de&nbsp;<span class="math inline">k</span>. Para asegurarnos de alcanzar el óptimo, tenemos que minimizar sobre todo&nbsp;<span class="math inline">k</span>:</p>
+<p><span class="math display">
+m[i,j] = \min_{i\le k\le j-1} \left\{ m[i,k]+m[k+1,j]+p[i-1]\times p[k]\times p[j] \right\}
+</span></p>
+<p>Esto lo podríamos implementar mediante una función recursiva, pero, tal como sucedía en el ejemplo de Fibonacci, ésta demoraría un tiempo exponencial en ejecutarse, porque generaría y evaluaría todas las parentizaciones posibles. Esta búsqueda exhaustiva es un método que encuentra la respuesta correcta (se le suele llamar “método fuerza bruta”), pero usualmente es demasiado ineficiente.</p>
+<p>Afortunadamente, en este caso podemos usar tabulación, porque hay solo alrededor de&nbsp;<span class="math inline">n^2/2</span> casilleros que llenar en la matriz&nbsp;<span class="math inline">m</span>, y los podemos ir llenando en un orden tal que al calcular el mínimo sobre todo&nbsp;<span class="math inline">k</span>, los casilleros necesarios ya han sido llenados previamente.</p>
+<p>En efecto, introduzcamos una nueva variable&nbsp;<span class="math inline">d=j-i+1</span>. Esto es el número de matrices involucradas en el producto&nbsp;<span class="math inline">A_i \cdots A_j</span>. Lo que haremos será ir llenando la matriz en orden ascendente de la variable&nbsp;<span class="math inline">d</span>, comenzando con el caso trivial&nbsp;<span class="math inline">d=1</span>, hasta terminar con el caso&nbsp;<span class="math inline">d=n</span>, que corresponde a la solución del problema original.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> opti_multi_mat(p):</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(p)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>np.zeros((n<span class="op">+</span><span class="dv">1</span>,n<span class="op">+</span><span class="dv">1</span>)) <span class="co"># Esto ya deja la diagonal en cero</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,n<span class="op">-</span>d<span class="op">+</span><span class="dv">2</span>):</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>i<span class="op">+</span>d<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>            m[i,j]<span class="op">=</span>math.inf <span class="co"># +infinito</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(i,j):</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                q<span class="op">=</span>m[i,k]<span class="op">+</span>m[k<span class="op">+</span><span class="dv">1</span>,j]<span class="op">+</span>p[i<span class="op">-</span><span class="dv">1</span>]<span class="op">*</span>p[k]<span class="op">*</span>p[j]</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> q<span class="op">&lt;</span>m[i,j]:</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                    m[i,j]<span class="op">=</span>q</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m[<span class="dv">1</span>,n]</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p<span class="op">=</span>np.array([<span class="dv">100</span>,<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">10</span>])</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(opti_multi_mat(p))</span></code></pre></div>
+<pre><code>20000.0</code></pre>
+<p>Es fácil ver que este algoritmo corre en tiempo&nbsp;<span class="math inline">O(n^3)</span>, porque debe rellenar&nbsp;<span class="math inline">\Theta(n^2)</span> casilleros, y cada uno puede requerir examinar&nbsp;<span class="math inline">n</span> valores posibles de&nbsp;<span class="math inline">k</span> en el peor caso. Esto es significativamente mejor que el algoritmo de fuerza bruta.</p>
+<p>Esta cota cúbica podría, sin embargo, ser un poco exagerada, porque en muchos casos la variable&nbsp;<span class="math inline">k</span> toma mucho menos que&nbsp;<span class="math inline">n</span> valores. Un cálculo más preciso nos señala que el número total de veces que se ejecuta el cuerpo del ciclo <code>for k</code> es igual a</p>
+<p><span class="math display">
+\sum_{1\le i\le k&lt;j\le n} 1 =\frac{n(n-1)(n+1)}{6} = \Theta(n^3)
+</span></p>
+<p>Por lo tanto el algoritmo en realidad demora un tiempo cúbico.</p>
+<p>Como vemos, el resultado del proceso es el costo óptimo, pero eso no nos da ninguna información sobre cuál es la parentización óptima. Pero en realidad la información está ahí, porque el valor de&nbsp;<span class="math inline">k</span> para el cual se alcanza el mínimo nos dice dónde separar la parentización en cada caso. Basta entonces con que dejemos anotado, para cada&nbsp;<span class="math inline">i,j</span> cuál es el valor de&nbsp;<span class="math inline">k</span> para el que se alcanza el mínimo. Llamemos&nbsp;<span class="math inline">s[i,j]</span> a ese valor de&nbsp;<span class="math inline">k</span>.</p>
+<p>Modifiquemos nuestra función para que construya y retorne la matriz&nbsp;<span class="math inline">s</span> además del costo óptimo, y escribamos otra función que, dada esa matriz&nbsp;<span class="math inline">s</span>, imprima la fórmula parentizada de la manera óptima.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> opti_multi_mat(p):</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(p)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>np.zeros((n<span class="op">+</span><span class="dv">1</span>,n<span class="op">+</span><span class="dv">1</span>)) <span class="co"># Esto ya deja la diagonal en cero</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>np.zeros((n<span class="op">+</span><span class="dv">1</span>,n<span class="op">+</span><span class="dv">1</span>),dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> d <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,n<span class="op">-</span>d<span class="op">+</span><span class="dv">2</span>):</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>i<span class="op">+</span>d<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>            m[i,j]<span class="op">=</span>math.inf <span class="co"># +infinito</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(i,j):</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>                q<span class="op">=</span>m[i,k]<span class="op">+</span>m[k<span class="op">+</span><span class="dv">1</span>,j]<span class="op">+</span>p[i<span class="op">-</span><span class="dv">1</span>]<span class="op">*</span>p[k]<span class="op">*</span>p[j]</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> q<span class="op">&lt;</span>m[i,j]:</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>                    m[i,j]<span class="op">=</span>q</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>                    s[i,j]<span class="op">=</span>k <span class="co"># anotamos dónde se alcanza el min</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (m[<span class="dv">1</span>,n],s)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> paren_desde_hasta(s,i,j):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i<span class="op">==</span>j:</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&quot;A&quot;</span><span class="op">+</span><span class="bu">str</span>(i)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&quot;(&quot;</span><span class="op">+</span>paren_desde_hasta(s,i,s[i,j])<span class="op">+</span><span class="st">&quot; &quot;</span>\</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                <span class="op">+</span>paren_desde_hasta(s,s[i,j]<span class="op">+</span><span class="dv">1</span>,j)<span class="op">+</span><span class="st">&quot;)&quot;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parentizacion(s):</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(s)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> paren_desde_hasta(s,<span class="dv">1</span>,n)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p<span class="op">=</span>np.array([<span class="dv">100</span>,<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">10</span>])</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>(opt,s)<span class="op">=</span>opti_multi_mat(p)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(parentizacion(s))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Costo=&quot;</span>, opt)</span></code></pre></div>
+<pre><code>(A1 (A2 A3))
+Costo= 20000.0</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p<span class="op">=</span>np.array([<span class="dv">30</span>,<span class="dv">35</span>,<span class="dv">15</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">25</span>])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>(opt,s)<span class="op">=</span>opti_multi_mat(p)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(parentizacion(s))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Costo=&quot;</span>, opt)</span></code></pre></div>
+<pre><code>((A1 (A2 A3)) ((A4 A5) A6))
+Costo= 15125.0</code></pre>
+<p>Para recapitular, la técnica de diseño de programación dinámica divide un problema en varios subproblemas con la misma estructura que el problema original, luego se resuelven dichos subproblemas y finalmente, a partir de éstos, se obtiene la solución al problema original. La diferencia radica en que la programación dinámica se ocupa cuando los subproblemas se repiten, como en el cálculo de los números de Fibonacci. En este caso, en vez de usar recursión para obtener las soluciones a los subproblemas éstas se van tabulando en forma bottom-up, y luego estos resultados son utilizados para resolver subproblemas más grandes. De esta forma, se evita el tener que realizar el mismo llamado recursivo varias veces.</p>
+<p>La programación dinámica se ocupa en general para resolver problemas de optimización (maximización o minimización de alguna función objetivo). Estos problemas pueden tener una o varias soluciones óptimas, y el objetivo es encontrar alguna de ellas. Los pasos generales para utilizar programación dinámica en la resolución de un problema son los siguientes:</p>
+<ul>
+<li><p>Encontrar la subestructura óptima del problema, es decir, encontrar aquellos subproblemas en los que se compone el problema original, tal que si uno encuentra sus soluciones óptimas entonces es posible obtener la solución óptima al problema original.</p></li>
+<li><p>Definir el valor de la solución óptima en forma recursiva.</p></li>
+<li><p>Calcular el valor de la solución partiendo primero por los subproblemas más pequeños y tabulándo las soluciones, lo que luego permite obtener la solución de subproblemas más grandes. Terminar cuando se tiene la solución al problema original.</p></li>
+</ul>
+<p>Estos pasos permiten obtener el valor óptimo de la solución al problema. También es posible ir guardando información extra en cada paso del algoritmo, que luego permita reconstruir el camino realizado para hallar la solución óptima (por ejemplo, para obtener la instancia específica de la solución óptima, y no sólo el valor óptimo de la función objetivo).</p>
+</section>
+<section id="ejemplo-encontrar-la-subsecuencia-común-más-larga" class="level3">
+<h3>Ejemplo: Encontrar la subsecuencia común más larga</h3>
+<p>Dadas dos secuencias de datos&nbsp;<span class="math inline">a</span> y&nbsp;<span class="math inline">b</span>, de largo&nbsp;<span class="math inline">m</span> y&nbsp;<span class="math inline">n</span> respectivamente (pueden ser listas o strings), una subsecuencia común es una subsecuencia de elementos (posiblemente saltados) de&nbsp;<span class="math inline">a</span> que coincide con una subsecuencia de&nbsp;<span class="math inline">b</span>. Nos interesa encontrar el largo de la subsecuencia común más larga (en inglés <em>LCS</em>, por <em>longest common subsequence</em>).</p>
+<p>Este problema se puede resolver recursivamente. La condición de borde es que la subsecuencia común más larga entre dos secuencias en que al menos una de ellas es vacía (de largo cero) es la secuencia vacía. Si ambas secuencias son no vacías, observamos que una subsecuencia común más larga entre&nbsp;<span class="math inline">a[0:i]</span> y&nbsp;<span class="math inline">b[0:j]</span> se puede obtener de la siguiente manera:</p>
+<ul>
+<li>Si ambas secuencias terminan en el mismo elemento, agregamos ese elemento al final de la subsecuencia común más larga entre <span class="math inline">a[0:i-1]</span> y <span class="math inline">b[0:j-1]</span></li>
+<li>Si no terminan en el mismo elemento, tomamos lo más largo que resulte entre ignorar el último elemento de <span class="math inline">a[0:i]</span> y buscar una subsecuencia común más larga entre <span class="math inline">a[0:i-1]</span> y <span class="math inline">b[0:j]</span>, o ignorar el último elemento de <span class="math inline">b[0:j]</span> y buscar una subsecuencia común más larga entre <span class="math inline">a[0:i]</span> y <span class="math inline">b[0:j-1]</span></li>
+</ul>
+<p>Si llamamos&nbsp;<span class="math inline">L_{i,j}</span> al largo de la subsecuencia común más larga entre&nbsp;<span class="math inline">a[0:i]</span> y&nbsp;<span class="math inline">b[0:j]</span>, tenemos que&nbsp;<span class="math inline">L_{0,j}=L_{i,0}=0</span>, y que para&nbsp;<span class="math inline">i,j&gt;0</span></p>
+<p><span class="math display">
+L_{i,j}=
+\begin{cases}
+1+L_{i-1,j-1} &amp; \text{si } a[i-1]=b[j-1]\\
+\max\{L_{i,j-1},L_{i-1,j}\} &amp; \text{si } a[i-1] \ne b[j-1]
+\end{cases}
+</span></p>
+<p>El resultado buscado es&nbsp;<span class="math inline">L_{m,n}</span>.</p>
+<p>Una implementación eficiente de este algoritmo se puede lograr usando tabulación:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> LCS(a,b):</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Encuentra el largo de la subsecuencia común más larga entre a y b</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span><span class="bu">len</span>(a)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(b)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    L<span class="op">=</span>np.zeros((m<span class="op">+</span><span class="dv">1</span>,n<span class="op">+</span><span class="dv">1</span>),dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,m<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,n<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> a[i<span class="op">-</span><span class="dv">1</span>]<span class="op">==</span>b[j<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                L[i,j]<span class="op">=</span><span class="dv">1</span><span class="op">+</span>L[i<span class="op">-</span><span class="dv">1</span>,j<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                L[i,j]<span class="op">=</span><span class="bu">max</span>(L[i<span class="op">-</span><span class="dv">1</span>,j],L[i,j<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L[m,n] </span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(LCS(<span class="st">&quot;abracadabra&quot;</span>,<span class="st">&quot;pasapalabra&quot;</span>))</span></code></pre></div>
+<pre><code>7</code></pre>
+<hr />
+</section>
+<section id="ejercicio-3.3" class="level3">
+<h3>Ejercicio 3.3</h3>
+<p>Modifique la función <code>LCS</code> para que retorne una subsecuencia común más larga, en lugar de retornar su longitud.</p>
+<hr />
+</section>
+</section>
+<section id="algoritmos-avaros-greedy-algorithms" class="level2">
+<h2>Algoritmos Avaros (<em>Greedy Algorithms</em>)</h2>
+<p>Se dice que un algoritmo de optimización es <em>avaro</em> si siempre toma la decisión óptima de corto plazo. Por ejemplo, un algoritmo avaro que intenta llegar a la cima del cerro más alto, daría siempre un paso en la dirección que le permite subir más con ese paso.</p>
+<p>En general, la estrategia avara no garantiza llegar a un óptimo global, porque es fácil quedarse atrapado en un óptimo local (en nuestro ejemplo, llegar a la cima de un cerro pequeño y no poder salir de ahí).</p>
+<p>Sin embargo, hay problemas para los cuales la estrategia avara sí encuentra un óptimo global:</p>
+<section id="ejemplo-asignación-de-actividades" class="level3">
+<h3>Ejemplo: Asignación de actividades</h3>
+<p>Supongamos que hay un conjunto&nbsp;<span class="math inline">n</span> de actividades&nbsp;<span class="math inline">a_1, \ldots, a_n</span> que para poder realizarse necesitan acceso a un recurso que no puede ser compartido. Por ejemplo,&nbsp;<span class="math inline">n</span> reuniones que solo se pueden realizar en una única sala.</p>
+<p>Cada actividad tiene un tiempo de inicio&nbsp;<span class="math inline">t_i</span> y un tiempo de término&nbsp;<span class="math inline">t_f</span>, lo que se interpreta como que necesita ocupar el recurso en el intervalo&nbsp;<span class="math inline">[t_i,t_f)</span>, cerrado a la izquierda, abierto a la derecha. Se dice que dos actividades son compatibles si sus respectivos intervalos no se traslapan. El problema de asignación de actividades consiste en encontrar un conjunto maximal de actividades compatibles.</p>
+<p>Por ejemplo, para el siguiente conjunto de actividades,</p>
+<figure>
+<img src="recursos/actividades.png" alt="actividades" /><figcaption aria-hidden="true">actividades</figcaption>
+</figure>
+<p>un conjunto compatible maximal es&nbsp;<span class="math inline">\{a_1,a_3,a_4,a_6,a_7\}</span>.</p>
+<p>Un problema de optimización de este tipo siempre se puede resolver por fuerza bruta, porque el número de soluciones posibles es finito, pero tratamos de evitarlo a menos que no haya alternativa, porque puede demorar un tiempo exponencial.</p>
+<p>En este caso, podemos resolver el problema de manera mucho más eficiente (tiempo&nbsp;<span class="math inline">\Theta(n)</span>) usando una estrategia avara.</p>
+<p>Supongamos que las actividades están ordenadas en forma ascendente por su hora de término&nbsp;<span class="math inline">t_f</span>. El algoritmo escoge la primera actividad disponible en este orden, luego elimina todas las actividades que se superponen con ella, y a continuación repite el proceso con las actividades restantes:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Input es una matriz con filas de la forma [ti,tf]</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ordenada ascendente por tf</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>A<span class="op">=</span>np.array([ [<span class="dv">0</span>,<span class="dv">0</span>], <span class="co"># la fila 0 se ignora</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>,<span class="dv">3</span>],</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>,<span class="dv">6</span>],</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">5</span>,<span class="dv">7</span>],</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">7</span>,<span class="dv">8</span>],</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">4</span>,<span class="dv">9</span>],</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">10</span>,<span class="dv">11</span>],</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">11</span>,<span class="dv">12</span>],</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">9</span>,<span class="dv">12</span>]</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>])</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> asigna_avaro(A):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(A)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    sol<span class="op">=</span>[<span class="dv">1</span>] <span class="co"># la primera tarea es siempre parte de la solución</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    j<span class="op">=</span><span class="dv">1</span>     <span class="co"># j identifica a la más reciente tarea seleccionada</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A[i,<span class="dv">0</span>]<span class="op">&gt;=</span>A[j,<span class="dv">1</span>]: <span class="co"># ti[i]&gt;=tf[j] ==&gt; i es la primera tarea</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>            sol.append(i)  <span class="co"># que es compatible con j, se agrega</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>i            <span class="co"># a la solución y pasa a ser la más reciente</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sol</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>asigna_avaro(A)</span></code></pre></div>
+<pre><code>[1, 3, 4, 6, 7]</code></pre>
+<p>El algoritmo resultante se llama “<em>Earliest-Finish-First</em>” (<em>EFF</em>).</p>
+<p>¿Cómo podemos estar seguros que la solución encontrada es realmente óptima?</p>
+<p>Demostraremos por inducción sobre&nbsp;<span class="math inline">n</span> que el algoritmo avaro encuentra una solución óptima.</p>
+<p>Trivialmente el algoritmo encuentra la solución correcta en el caso&nbsp;<span class="math inline">n=1</span>.</p>
+<p>Consideremos entonces el caso&nbsp;<span class="math inline">n&gt;1</span> y supongamos, por contradicción, que no existe ninguna solución óptima que incluya a la actividad&nbsp;<span class="math inline">a_1</span>. Consideremos una solución óptima y supongamos que su actividad con menor&nbsp;<span class="math inline">t_f</span> es la actividad&nbsp;<span class="math inline">a_k</span>. Dado que la lista está ordenada por&nbsp;<span class="math inline">t_f</span>, se tiene que&nbsp;<span class="math inline">t_f[1]\le t_f[k]</span>. Como la solución no puede contener ninguna otra actividad que comience antes de&nbsp;<span class="math inline">t_f[k]</span>, entonces podemos reemplazar la actividad&nbsp;<span class="math inline">a_k</span> por la actividad&nbsp;<span class="math inline">a_1</span> y obtenemos otra solución válida y que tiene el mismo número de actividades, por lo tanto también es óptima: contradicción con la hipótesis que&nbsp;<span class="math inline">a_1</span> no podía ser parte de ninguna solución óptima.</p>
+<p>Por lo tanto,&nbsp;<span class="math inline">a_1</span> puede ser parte de una solución óptima, y en consecuencia ninguna actividad que se superponga con ella puede estar incluída. Si las eliminamos, lo que queda es un problema de optimización del mismo tipo, pero con un número estrictamente menor de actividades, el cual lo resuelve correctamente el algoritmo avaro por hipótesis de inducción.</p>
+</section>
+</section>
+<section id="backtracking" class="level2">
+<h2>Backtracking</h2>
+<p>Hay ocasiones en que no tenemos más alternativa que resolver un problema por prueba y error, explorando un espacio de soluciones en forma exhaustiva. Una forma de hacerlo es en forma recursiva, probando distintas vías de solución hasta que alguna funcione, o hasta agotar las posibilidades.</p>
+<section id="el-laberinto" class="level3">
+<h3>El laberinto</h3>
+<p>Supongamos que nos encontramos al interior de un laberinto y queremos encontrar la salida. Si no tenemos ninguna información adicional, lo que podemos hacer es intentar salir en una dirección, si eso no funciona intentar en otras, etc.</p>
+<p>Para fijar las ideas, supongamos que el laberinto se dibuja usando caracteres del teclado, donde los espacios en blanco son lugares por donde se puede pasar, y el sigo “igual” representa la salida. Todos los demás símbolos representan murallas. Por ejemplo,</p>
+<pre><code>+--+-----+--+
+|  |     |  |
+|  +--+     =
+|     |  |  |
++--+  |  |  |
+|  |        |
+|  |     |  |
++--+-----+--+</code></pre>
+<p>Almacenaremos el laberinto en una lista de strings (de a uno por línea):</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+-----+--+&quot;</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |     |  |&quot;</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  +--+     =&quot;</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|     |  |  |&quot;</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+  |  |  |&quot;</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |        |&quot;</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |     |  |&quot;</span>,</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+-----+--+&quot;</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<p>El problema es determinar si existe una manera de salir si uno comienza en el casillero&nbsp;<span class="math inline">[i][j]</span>. Solo está permitido moverse en dirección horizontal o vertical, no en diagonal.</p>
+<p>Resolveremos este problema escribiendo una función booleana&nbsp;<span class="math inline">salida(i,j)</span> que retorna verdadero si existe un camino hacia la salida a partir de la coordenada&nbsp;<span class="math inline">i,j</span>. Esto lo hace intentando en las cuatro direcciones:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> salida(i,j):</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> L[i][j]<span class="op">==</span><span class="st">&quot;=&quot;</span>: <span class="co"># encontramos la salida</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> L[i][j]<span class="op">!=</span><span class="st">&quot; &quot;</span>: <span class="co"># espacio ocupado</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> salida(i,j<span class="op">-</span><span class="dv">1</span>) <span class="op">\</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">or</span> salida(i,j<span class="op">+</span><span class="dv">1</span>) <span class="op">\</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">or</span> salida(i<span class="op">-</span><span class="dv">1</span>,j) <span class="op">\</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">or</span> salida(i<span class="op">+</span><span class="dv">1</span>,j):</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span>  </span></code></pre></div>
+<p>Probemos si es posible salir desde la posición&nbsp;<span class="math inline">5,2</span> (¡pero por si acaso estemos atentos al botón para interrumpir el proceso!)</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+-----+--+&quot;</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |     |  |&quot;</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  +--+     =&quot;</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|     |  |  |&quot;</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+  |  |  |&quot;</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |        |&quot;</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |     |  |&quot;</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+-----+--+&quot;</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(salida(<span class="dv">5</span>,<span class="dv">2</span>))</span></code></pre></div>
+<pre><code>---------------------------------------------------------------------------
+
+RecursionError                            Traceback (most recent call last)
+
+&lt;ipython-input-19-0ea1bd4da578&gt; in &lt;module&gt;
+      9 &quot;+--+-----+--+&quot;
+     10 ]
+---&gt; 11 print(salida(5,2))
+
+
+&lt;ipython-input-18-ba8a4ad77a65&gt; in salida(i, j)
+      4     if L[i][j]!=&quot; &quot;: # espacio ocupado
+      5         return False
+----&gt; 6     if salida(i,j-1) \
+      7     or salida(i,j+1) \
+      8     or salida(i-1,j) \
+
+
+&lt;ipython-input-18-ba8a4ad77a65&gt; in salida(i, j)
+      5         return False
+      6     if salida(i,j-1) \
+----&gt; 7     or salida(i,j+1) \
+      8     or salida(i-1,j) \
+      9     or salida(i+1,j):
+
+
+... last 2 frames repeated, from the frame below ...
+
+
+&lt;ipython-input-18-ba8a4ad77a65&gt; in salida(i, j)
+      4     if L[i][j]!=&quot; &quot;: # espacio ocupado
+      5         return False
+----&gt; 6     if salida(i,j-1) \
+      7     or salida(i,j+1) \
+      8     or salida(i-1,j) \
+
+
+RecursionError: maximum recursion depth exceeded in comparison</code></pre>
+<p>Lo más probable es que el programa se haya caído por exceso de recursividad antes de que tuviéramos que interrumpirlo a mano.</p>
+<p>Lo que sucede es que olvidamos incluir algo que impidiera que el programa explorara de nuevo un camino que ya antes había recorrido sin éxito, y eso lo condujo a entrar en un “loop” infinito.</p>
+<p>Para evitar esto, iremos marcando con un símbolo “x” los casilleros a medida que van siendo visitados. De esta forma, ninguno se puede visitar más de una vez:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> salida(i,j):</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> L[i][j]<span class="op">==</span><span class="st">&quot;=&quot;</span>: <span class="co"># encontramos la salida</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> L[i][j]<span class="op">!=</span><span class="st">&quot; &quot;</span>: <span class="co"># espacio ocupado</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    L[i]<span class="op">=</span>L[i][:j]<span class="op">+</span><span class="st">&quot;x&quot;</span><span class="op">+</span>L[i][j<span class="op">+</span><span class="dv">1</span>:]</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> salida(i,j<span class="op">-</span><span class="dv">1</span>) <span class="op">\</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">or</span> salida(i,j<span class="op">+</span><span class="dv">1</span>) <span class="op">\</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">or</span> salida(i<span class="op">-</span><span class="dv">1</span>,j) <span class="op">\</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">or</span> salida(i<span class="op">+</span><span class="dv">1</span>,j):</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span>  </span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+-----+--+&quot;</span>,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |     |  |&quot;</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  +--+     =&quot;</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|     |  |  |&quot;</span>,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+  |  |  |&quot;</span>,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |        |&quot;</span>,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |     |  |&quot;</span>,</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+-----+--+&quot;</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(salida(<span class="dv">5</span>,<span class="dv">2</span>))</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> linea <span class="kw">in</span> L:</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(linea)</span></code></pre></div>
+<pre><code>False
++--+-----+--+
+|  |     |  |
+|  +--+     =
+|     |  |  |
++--+  |  |  |
+|xx|        |
+|xx|     |  |
++--+-----+--+</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> [</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+-----+--+&quot;</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |     |  |&quot;</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  +--+     =&quot;</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|     |  |  |&quot;</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+  |  |  |&quot;</span>,</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |        |&quot;</span>,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;|  |     |  |&quot;</span>,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;+--+-----+--+&quot;</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(salida(<span class="dv">4</span>,<span class="dv">10</span>))</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> linea <span class="kw">in</span> L:</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(linea)</span></code></pre></div>
+<pre><code>True
++--+-----+--+
+|xx|xxxxx|  |
+|xx+--+xxxxx=
+|xxxxx|xx|xx|
++--+xx|xx|xx|
+|  |xxxxxxxx|
+|  |xxxxx|xx|
++--+-----+--+</code></pre>
+<hr />
+</section>
+<section id="ejercicio-3.4" class="level3">
+<h3>Ejercicio 3.4</h3>
+<p>Modifique la función para que marque con <code>"."</code> los casilleros por donde hubo intentos no exitosos de salir, y con <code>"x"</code> los casilleros que finalmente condujeron a la salida.</p>
+<hr />
+</section>
+</section>
+</section>
+
+<div id="lastupdate">
+Last updated: jue mar  4 15:10:55 -05 2021
+</div>
+</article>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>

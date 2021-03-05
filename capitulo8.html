@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>shared-macros</title>
+  <style>
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   var macros = [];
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      macros: macros,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<article>
+
+
+
+<div id="collapsiblemenu">
+  <button class="collapsible">
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+    <div class="shortthickbar"></div>
+  </button>
+  <div class="content">
+    <ul>
+    <li><a href="index.html">Home</a></li>
+    </ul>
+    <ul>
+    <li><a href="#búsqueda-en-texto">8 Búsqueda en Texto</a>
+    <ul>
+    <li><a href="#algoritmo-de-fuerza-bruta">Algoritmo de fuerza bruta</a></li>
+    <li><a href="#algoritmo-knuth-morris-pratt-kmp">Algoritmo Knuth-Morris-Pratt (KMP)</a></li>
+    <li><a href="#algoritmo-de-boyer-moore">Algoritmo de Boyer-Moore</a></li>
+    </ul></li>
+    </ul>
+  </div>
+</div>
+
+
+<section id="búsqueda-en-texto" class="level1">
+<h1>8 Búsqueda en Texto</h1>
+<p>La búsqueda de patrones en un texto es un problema muy importante en la práctica. Sus aplicaciones en computación son variadas, como por ejemplo la búsqueda de una palabra en un archivo de texto o problemas relacionados con biología computacional, en donde se requiere buscar patrones dentro de una secuencia de ADN, la cual puede ser modelada como una secuencia de caracteres (el problema es más complejo que lo descrito, puesto que se requiere buscar patrones en donde ocurren alteraciones con cierta probabilidad, esto es, la búsqueda no es exacta).</p>
+<p>En este capítulo se considerará el problema de buscar la ocurrencia de un patrón dentro de un texto. Se utilizarán las siguientes convenciones:</p>
+<ul>
+<li><span class="math inline">n</span> denotará el largo del texto en donde se buscará el patrón, es decir, el texto es <span class="math inline">a_0 a_1 \ldots a_{n-1}</span></li>
+<li><span class="math inline">m</span> denotará el largo del patrón a buscar, es decir el patrón es <span class="math inline">b_0 b_1 \ldots b_{m-1}</span></li>
+</ul>
+<p>Por ejemplo:</p>
+<ul>
+<li>Texto = “analisis de algoritmos”</li>
+<li>Patrón = “algo”</li>
+</ul>
+<section id="algoritmo-de-fuerza-bruta" class="level2">
+<h2>Algoritmo de fuerza bruta</h2>
+<p>Se alinea la primera posición del patrón con la primera posición del texto, y se comparan los caracteres uno a uno hasta que se acabe el patrón, en cuyo caso se encontró una ocurrencia del patrón en el texto, o hasta que se encuentre una discrepancia.</p>
+<figure>
+<img src="recursos/bruta1.png" alt="bruta1" /><figcaption aria-hidden="true">bruta1</figcaption>
+</figure>
+<p>Si se detiene la búsqueda por una discrepancia, se desliza el patrón en una posición hacia la derecha y se intenta calzar el patrón nuevamente.</p>
+<figure>
+<img src="recursos/bruta2.png" alt="bruta2" /><figcaption aria-hidden="true">bruta2</figcaption>
+</figure>
+<p>El proceso se repite, siempre avanzando en una posición</p>
+<figure>
+<img src="recursos/bruta3.png" alt="bruta3" /><figcaption aria-hidden="true">bruta3</figcaption>
+</figure>
+<p>hasta que finalmente se encuentre</p>
+<figure>
+<img src="recursos/bruta4.png" alt="bruta4" /><figcaption aria-hidden="true">bruta4</figcaption>
+</figure>
+<p>o se agote el texto sin encontra el patrón.</p>
+<p>En el peor caso este algoritmo realiza&nbsp;<span class="math inline">\Theta(mn)</span> comparaciones de caracteres.</p>
+<p>Si suponemos que todos los caracteres aparecen en forma equiprobable e independiente, en el caso esperado el método de fuerza bruta funciona mucho mejor. Si el alfabeto es de tamaño&nbsp;<span class="math inline">c</span>, entonces en cada comparación la probabilidad de que dos caracteres sean iguales es&nbsp;<span class="math inline">\frac{1}{c}</span> y de que sean distintos es&nbsp;<span class="math inline">1-\frac{1}{c}</span>. A partir de cada posición, el número esperado de comparaciones que se efectúa hasta encontrar un descalce es</p>
+<p><span class="math display">
+\frac{1}{1-\frac{1}{c}}=\frac{c}{c-1}= 1+\frac{1}{c-1}
+</span></p>
+<p>Por lo tanto, en cada posición en que el patrón no está, el número esperado de comparaciones es una constante poco mayor que&nbsp;<span class="math inline">1</span>, por lo tanto el costo total de la búsqueda es&nbsp;<span class="math inline">\Theta(n)</span>.</p>
+</section>
+<section id="algoritmo-knuth-morris-pratt-kmp" class="level2">
+<h2>Algoritmo Knuth-Morris-Pratt (KMP)</h2>
+<p>Suponga que se está comparando el patrón y el texto en una posición dada, cuando se encuentra una discrepancia.</p>
+<figure>
+<img src="recursos/kmp1.png" alt="kmp1" /><figcaption aria-hidden="true">kmp1</figcaption>
+</figure>
+<p>Sea&nbsp;<span class="math inline">x</span> la parte del patrón que calza con el texto, e&nbsp;<span class="math inline">y</span> la correspondiente parte del texto, y suponga que el largo de&nbsp;<span class="math inline">x</span> es&nbsp;<span class="math inline">j</span>. El algoritmo de fuerza bruta mueve el patrón una posición hacia la derecha, sin embargo, esto puede o no puede ser lo correcto en el sentido que los primeros&nbsp;<span class="math inline">j-1</span> caracteres de&nbsp;<span class="math inline">x</span> pueden o no pueden calzar los últimos&nbsp;<span class="math inline">j-1</span> caracteres de&nbsp;<span class="math inline">y</span>.</p>
+<p>La observación clave que realiza el algoritmo Knuth-Morris-Pratt (en adelante KMP) es que&nbsp;<span class="math inline">x</span> es igual a&nbsp;<span class="math inline">y</span>, por lo que la pregunta planteada en el párrafo anterior puede ser respondida mirando solamente el patrón de búsqueda, lo cual permite precalcular la respuesta y almacenarla en una tabla.</p>
+<p>Por lo tanto, si deslizar el patrón en una posición no funciona, se puede intentar deslizarlo en&nbsp;<span class="math inline">2, 3, \ldots,</span> hasta&nbsp;<span class="math inline">j</span> posiciones.</p>
+<p>Se define la <em>función de fracaso</em> (<em>failure function</em>) del patrón como:</p>
+<p><span class="math display">
+f(j)=\max\{i | 0 \le i&lt;j \wedge b_0\ldots b_{i-1} = b_{j-i-1}\ldots b_{j-1} \}
+</span></p>
+<figure>
+<img src="recursos/kmp2.png" alt="kmp2" /><figcaption aria-hidden="true">kmp2</figcaption>
+</figure>
+<p>Intuitivamente,&nbsp;<span class="math inline">f(j)</span> es el largo del mayor prefijo de&nbsp;<span class="math inline">x</span> que además es sufijo del mismo&nbsp;<span class="math inline">x</span>. Por ejemplo, si el patrón es <code>"aabaaa"</code>, entonces la función de fracaso es</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">j</span></th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">f(j)</span></td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Si se detecta una discrepancia entre el patrón y el texto cuando se trata de calzar&nbsp;<span class="math inline">b_j</span>, se desliza el patrón de manera que&nbsp;<span class="math inline">b_{f(j)-1}</span> se encuentre donde&nbsp;<span class="math inline">b_{j-1}</span> se encontraba, y se intenta calzar nuevamente.</p>
+<figure>
+<img src="recursos/kmp3.png" alt="kmp3" /><figcaption aria-hidden="true">kmp3</figcaption>
+</figure>
+<p>En el siguiente ejemplo mostramos la ejecución de una búsqueda:</p>
+<figure>
+<img src="recursos/kmp4.png" alt="kmp4" /><figcaption aria-hidden="true">kmp4</figcaption>
+</figure>
+<p>Suponiendo que se tiene la función&nbsp;<span class="math inline">f(j)</span> precalculado, la implementación del algoritmo KMP es la siguiente:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> kmp(a,b,f): <span class="co"># busca b dentro de a, retorna None (fracaso) o posición del calce</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(a)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span><span class="bu">len</span>(b)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    j<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,n):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> j<span class="op">==</span>m:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> k<span class="op">-</span>m <span class="co"># éxito</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j<span class="op">&gt;</span><span class="dv">0</span> <span class="kw">and</span> a[k]<span class="op">!=</span>b[j]:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>f[j]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a[k]<span class="op">==</span>b[j]:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>j<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span> <span class="co"># fracaso</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>f<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(kmp(<span class="st">&quot;aaaabaabaaabb&quot;</span>,<span class="st">&quot;aabaaa&quot;</span>,f))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(kmp(<span class="st">&quot;aaaabaabaaabb&quot;</span>,<span class="st">&quot;abbaaa&quot;</span>,f))</span></code></pre></div>
+<pre><code>5
+None</code></pre>
+<p>El tiempo de ejecución de este algoritmo no es difícil de analizar, pero es necesario ser cuidadoso al hacerlo. Dado que se tienen dos ciclos anidados, se puede acotar el tiempo de ejecución como el número de veces que se ejecuta el ciclo externo (menor o igual a&nbsp;<span class="math inline">n</span>) multiplicado por el número de veces que se ejecuta el ciclo interno (menor o igual a&nbsp;<span class="math inline">m</span>), lo que de una cota superior a&nbsp;<span class="math inline">O(mn)</span>, ¡que es igual a lo que demora el algoritmo de fuerza bruta!.</p>
+<p>Sin embargo, el análisis descrito es pesimista. Observemos que el número total de veces que el ciclo interior es ejecutado es menor o igual al número de veces que se puede decrementar&nbsp;<span class="math inline">j</span>, dado que&nbsp;<span class="math inline">f(j)&lt;j</span>. Pero&nbsp;<span class="math inline">j</span> comienza desde cero y es siempre mayor o igual que cero, por lo que dicho número es menor o igual al número de veces que&nbsp;<span class="math inline">j</span> es incrementado, el cual es menor que&nbsp;<span class="math inline">n</span>. Por lo tanto, el tiempo total de ejecución es&nbsp;<span class="math inline">\Theta(n)</span> en el peor caso. Por otra parte,&nbsp;<span class="math inline">k</span> nunca es decrementado, lo que implica que el algoritmo nunca se devuelve en el texto.</p>
+<section id="cálculo-de-la-función-de-fracaso" class="level3">
+<h3>Cálculo de la función de fracaso</h3>
+<p>Queda por resolver el problema de definir la función de fracaso,&nbsp;<span class="math inline">f(j)</span>. Esto se puede realizar inductivamente. Para empezar,&nbsp;<span class="math inline">f(1)=0</span> por definición. Para calcular&nbsp;<span class="math inline">f(j+1)</span> suponga que ya se tienen almacenados los valores de&nbsp;<span class="math inline">f(1), f(2), \ldots, f(j)</span>. Se desea encontrar un&nbsp;<span class="math inline">i</span> tal que el&nbsp;<span class="math inline">i</span>-ésimo carácter del patrón sea igual al&nbsp;<span class="math inline">j</span>-ésimo carácter del patrón.</p>
+<p>Para esto se debe cumplir que&nbsp;<span class="math inline">i=f(j)</span>. Si&nbsp;<span class="math inline">b_i=b_j</span>, entonces&nbsp;<span class="math inline">f(j+1)=i+1</span>. En caso contrario, se reemplaza&nbsp;<span class="math inline">i</span> por&nbsp;<span class="math inline">f(i)</span> y se verifica nuevamente la condición.</p>
+<figure>
+<img src="recursos/kmp5.png" alt="kmp5" /><figcaption aria-hidden="true">kmp5</figcaption>
+</figure>
+<p>El algoritmo resultante es el siguiente (note que es similar al algoritmo KMP):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fracaso(b): <span class="co"># calcula y retorna función de fracaso para patrón b</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span><span class="bu">len</span>(b)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    f<span class="op">=</span>[<span class="dv">0</span>]<span class="op">*</span>(m<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,m):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        i<span class="op">=</span>f[j]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> i<span class="op">&gt;</span><span class="dv">0</span> <span class="kw">and</span> b[i]<span class="op">!=</span>b[j]:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            i<span class="op">=</span>f[i]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> b[i]<span class="op">==</span>b[j]:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            f[j<span class="op">+</span><span class="dv">1</span>]<span class="op">=</span>i<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            f[j<span class="op">+</span><span class="dv">1</span>]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> f</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fracaso(<span class="st">&quot;aabaaa&quot;</span>))</span></code></pre></div>
+<pre><code>[0, 0, 1, 0, 1, 2, 2]</code></pre>
+<p>El tiempo de ejecución para calcular la función de fracaso puede ser acotado por los incrementos y decrementos de la variable&nbsp;<span class="math inline">i</span>, y por lo tanto es&nbsp;<span class="math inline">\Theta(m)</span>.</p>
+<p>Por lo tanto, el tiempo total de ejecución del algoritmo en el peor caso, sumando el preprocesamiento del patrón más la búsqueda, es&nbsp;<span class="math inline">\Theta(m+n)</span>.</p>
+</section>
+</section>
+<section id="algoritmo-de-boyer-moore" class="level2">
+<h2>Algoritmo de Boyer-Moore</h2>
+<p>Hasta el momento, los algoritmos de búsqueda en texto siempre comparan el patrón con el texto de izquierda a derecha. La idea del algoritmo de Boyer-Moore es comparar <em>de derecha a izquierda</em>: si hay una discrepancia en el último carácter del patrón y el carácter del texto no aparece en todo el patrón, entonces éste se puede deslizar&nbsp;<span class="math inline">m</span> posiciones sin realizar ninguna comparación extra. En particular, no habría sido necesario comparar los primeros&nbsp;<span class="math inline">m-1</span> caracteres del texto, lo cual indica que se podría realizar una búsqueda en el texto con menos de&nbsp;<span class="math inline">n</span> comparaciones; sin embargo, si el carácter discrepante del texto se encuentra dentro del patrón, éste podría desplazarse en un número menor de espacios.</p>
+<p>El método descrito es la base del algoritmo Boyer-Moore, del cual se estudiarán dos variantes: Horspool y Sunday.</p>
+<section id="algoritmo-boyer-moore-hospool-bmh" class="level3">
+<h3>Algoritmo Boyer-Moore-Hospool (BMH)</h3>
+<p>Supongamos que el último caracter del patrón de búsqueda&nbsp;<span class="math inline">b</span> se encuentra alineado con el caracter&nbsp;<span class="math inline">a_k</span> del texto. El algoritmo BMH compara el patrón con el texto <strong>de derecha a izquierda</strong>, y se detiene cuando se encuentra una discrepancia con el texto. Cuando esto sucede, se desliza el patrón de manera que la letra&nbsp;<span class="math inline">c=a_k</span> del texto que estaba alineada con la letra final del patrón, ahora quede alineada con un caracter anterior de&nbsp;<span class="math inline">b</span> con el cual coincida, si dicho calce es posible, o si no, con&nbsp;<span class="math inline">b_{-1}</span>, un carácter ficticio a la izquierda de&nbsp;<span class="math inline">b_0</span> (este es el mejor caso del algoritmo).</p>
+<p>Para determinar el desplazamiento del patrón se define la función&nbsp;<span class="math inline">g(c)</span> como:</p>
+<ul>
+<li><span class="math inline">g(c)=i</span> si <span class="math inline">i</span> es el mayor subíndice en el rango <span class="math inline">0\le i \le m-2</span> tal que <span class="math inline">b_i=c</span>. Nótese que si hay más de una ocurrencia de <span class="math inline">c</span>, se toma la de más a la derecha.</li>
+</ul>
+<figure>
+<img src="recursos/bmh1.png" alt="bmh1" /><figcaption aria-hidden="true">bmh1</figcaption>
+</figure>
+<ul>
+<li><span class="math inline">g(c)=-1</span> si <span class="math inline">c</span> no aparece entre los primeros <span class="math inline">m-1</span> caracteres del patrón.</li>
+</ul>
+<figure>
+<img src="recursos/bmh2.png" alt="bmh2" /><figcaption aria-hidden="true">bmh2</figcaption>
+</figure>
+<p>En ambos casos se busca el caracter&nbsp;<span class="math inline">c</span> solo dentro de los primeros&nbsp;<span class="math inline">m-1</span> caracteres del patrón, excluyendo el último, para que el deslizamiento del patrón sea de al menos una posición.</p>
+<p>Esta función sólo depende del patrón y se puede precalcular antes de realizar la búsqueda.</p>
+<section id="ejemplo-de-boyer-moore-horspool" class="level4">
+<h4>Ejemplo de Boyer-Moore-Horspool</h4>
+<p>Supongamos que queremos buscar el patrón <code>"datos"</code> dentro de <code>"estructuras de datos"</code>. La función&nbsp;<span class="math inline">g(c)</span> estaría dada por</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">c</span></th>
+<th>“a”</th>
+<th>“d”</th>
+<th>“o”</th>
+<th>“t”</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">g(c)</span></td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>y&nbsp;<span class="math inline">g(c)=-1</span> para toda otra letra&nbsp;<span class="math inline">c</span>.</p>
+<p>El siguiente diagrama muestra el proceso de búsqueda:</p>
+<figure>
+<img src="recursos/bmh3.png" alt="bmh3" /><figcaption aria-hidden="true">bmh3</figcaption>
+</figure>
+<p>Por simplicidad de programación, para implementar el algoritmo usaremos un diccionario de Python para la función&nbsp;<span class="math inline">g</span>. En una implementación eficiente, esta función se impelemntaría como un arreglo subindicado por la representación numérica de cada letra.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> construyeg(b): <span class="co"># construye un diccionario para representar la función g</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>{}</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(b)<span class="op">-</span><span class="dv">1</span>): <span class="co"># ignoramos el último caracter</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        d[b[i]]<span class="op">=</span>i</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bmh(a,b): <span class="co"># busca b dentro de a, retorna None (fracaso) o posición del calce</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    g<span class="op">=</span>construyeg(b) <span class="co"># Uso: g(c)=g.get(c,-1) para rellenar con -1 los valores faltantes</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(a)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span><span class="bu">len</span>(b)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    k<span class="op">=</span>m<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    j<span class="op">=</span>m<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> k<span class="op">&lt;</span>n:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> j<span class="op">&lt;</span><span class="dv">0</span>:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> k<span class="op">-</span>m<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a[k<span class="op">-</span>(m<span class="op">-</span><span class="dv">1</span><span class="op">-</span>j)]<span class="op">==</span>b[j]:</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>j<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            k<span class="op">=</span>k<span class="op">+</span>(m<span class="op">-</span><span class="dv">1</span><span class="op">-</span>g.get(a[k],<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>m<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bmh(<span class="st">&quot;estructuras de datos&quot;</span>,<span class="st">&quot;datos&quot;</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bmh(<span class="st">&quot;estructuras de datos&quot;</span>,<span class="st">&quot;struct&quot;</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bmh(<span class="st">&quot;estructuras de datos&quot;</span>,<span class="st">&quot;gatos&quot;</span>))</span></code></pre></div>
+<pre><code>15
+1
+None</code></pre>
+<p>Se puede demostrar que si el alfabeto tiene tamaño&nbsp;<span class="math inline">L</span> y los caracteres aparecen con probabilidad uniforme y de manera independiente, entonces el tiempo promedio que demora BMH es</p>
+<p><span class="math display">
+\Theta\left( n \left( \frac{1}{m}+\frac{1}{2L} \right) \right)
+</span></p>
+<p>Para un alfabeto razonablemente grande, esto es aproximadamente&nbsp;<span class="math inline">\Theta\left( \frac{n}{m} \right)</span>.</p>
+</section>
+</section>
+<section id="algoritmo-boyer-moore-sunday-bms" class="level3">
+<h3>Algoritmo Boyer-Moore-Sunday (BMS)</h3>
+<p>El algoritmo BMH desliza el patrón basado en el símbolo del texto que corresponde a la posición del último carácter del patrón. Este siempre se desliza al menos una posición si se encuentra una discrepancia con el texto.</p>
+<p>Es fácil ver que si se utiliza el carácter una posición más adelante en el texto como entrada de la función siguiente el algoritmo también funciona, pero en este caso es necesario considerar el patrón completo al momento de calcular los valores de la función siguiente. Esta variante del algoritmo es conocida como Boyer-Moore-Sunday (BMS).</p>
+<p>Caso en que&nbsp;<span class="math inline">c=a_{k+1}</span> aparece dentro del patrón:</p>
+<figure>
+<img src="recursos/bms1.png" alt="bms1" /><figcaption aria-hidden="true">bms1</figcaption>
+</figure>
+<p>Caso en que&nbsp;<span class="math inline">c=a_{k+1}</span> no aparece dentro del patrón:</p>
+<figure>
+<img src="recursos/bms2.png" alt="bms2" /><figcaption aria-hidden="true">bms2</figcaption>
+</figure>
+<section id="ejemplo-de-boyer-moore-sunday" class="level4">
+<h4>Ejemplo de Boyer-Moore-Sunday</h4>
+<p>Supongamos que queremos buscar el patrón <code>"datos"</code> dentro de <code>"estructuras de datos"</code>. La función&nbsp;<span class="math inline">g(c)</span> estaría dada por</p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">c</span></th>
+<th>“a”</th>
+<th>“d”</th>
+<th>“o”</th>
+<th>“s”</th>
+<th>“t”</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">g(c)</span></td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>y&nbsp;<span class="math inline">g(c)=-1</span> para toda otra letra&nbsp;<span class="math inline">c</span>.</p>
+<p>El siguiente diagrama muestra el proceso de búsqueda:</p>
+<figure>
+<img src="recursos/bms3.png" alt="bms3" /><figcaption aria-hidden="true">bms3</figcaption>
+</figure>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> construyeg(b): <span class="co"># construye un diccionario para representar la función g</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>{}</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(b)): <span class="co"># utilizamos hasta el último caracter</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        d[b[i]]<span class="op">=</span>i</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bms(a,b): <span class="co"># busca b dentro de a, retorna None (fracaso) o posición del calce</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    g<span class="op">=</span>construyeg(b) <span class="co"># Uso: g(c)=g.get(c,-1) para rellenar con -1 los valores faltantes</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="bu">len</span>(a)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span><span class="bu">len</span>(b)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    k<span class="op">=</span>m<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    j<span class="op">=</span>m<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> k<span class="op">&lt;</span>n:</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> j<span class="op">&lt;</span><span class="dv">0</span>:</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> k<span class="op">-</span>m<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> a[k<span class="op">-</span>(m<span class="op">-</span><span class="dv">1</span><span class="op">-</span>j)]<span class="op">==</span>b[j]:</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>j<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> k<span class="op">&gt;=</span>n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>            k<span class="op">=</span>k<span class="op">+</span>(m<span class="op">-</span>g.get(a[k<span class="op">+</span><span class="dv">1</span>],<span class="op">-</span><span class="dv">1</span>))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>            j<span class="op">=</span>m<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bms(<span class="st">&quot;estructuras de datos&quot;</span>,<span class="st">&quot;datos&quot;</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bms(<span class="st">&quot;estructuras de datos&quot;</span>,<span class="st">&quot;struct&quot;</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(bms(<span class="st">&quot;estructuras de datos&quot;</span>,<span class="st">&quot;gatos&quot;</span>))</span></code></pre></div>
+<pre><code>15
+1
+None</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+</section>
+</section>
+</section>
+</section>
+
+<div id="lastupdate">
+Last updated: jue mar  4 15:12:00 -05 2021
+</div>
+</article>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+</body>
+</html>
